@@ -9,13 +9,8 @@ class rms{
 	public $statement;
 	public $cur;
 
-<<<<<<< HEAD:rms.php
 	function __construct(){
 		$this->connect = new PDO("mysql:host=localhost;dbname=pospointdb", "root", "");
-=======
-	function rms(){
-		$this->connect = new PDO("mysql:host=localhost;dbname=u559678163_pospointdb", "u559678163_pospointdbu", "!@#123qweasdZXC");
->>>>>>> 1760818fdd5922033bc6b6f3cdee37acc0018997:rms.php
 		if($this->Set_timezone() != '')
 		{
 			date_default_timezone_set($this->Set_timezone());

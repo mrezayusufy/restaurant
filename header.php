@@ -26,19 +26,11 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-<<<<<<< HEAD
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/vendor/parsley/parsley.css"/>
 
     <link rel="stylesheet" type="text/css" href="/vendor/bootstrap-select/bootstrap-select.min.css"/>
-=======
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="vendor/parsley/parsley.css"/>
-
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-select/bootstrap-select.min.css"/>
->>>>>>> 1760818fdd5922033bc6b6f3cdee37acc0018997
 
 </head>
 
@@ -55,26 +47,10 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     
                 </div>
-<<<<<<< HEAD
                  
                 <i class="fas fa-laugh-wink"></i>
                 <div class="sidebar-brand-text mx-3">Admin</div>
                  
-=======
-                <?php
-                if($object->Get_restaurant_logo() != '')
-                {
-                    echo '<img src="'.$object->Get_restaurant_logo().'" class="img-fluid" />';
-                }
-                else
-                {
-                ?>
-                <i class="fas fa-laugh-wink"></i>
-                <div class="sidebar-brand-text mx-3">Admin</div>
-                <?php
-                }
-                ?>
->>>>>>> 1760818fdd5922033bc6b6f3cdee37acc0018997
             </a>
 
             <!-- Divider -->
