@@ -11,8 +11,7 @@ class rms{
 
 	function __construct(){
 		$this->connect = new PDO("mysql:host=localhost;dbname=pospointdb", "root", "");
-		if($this->Set_timezone() != '')
-		{
+		if($this->Set_timezone() != '') {
 			date_default_timezone_set($this->Set_timezone());
 		}
 
