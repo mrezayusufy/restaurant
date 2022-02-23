@@ -392,7 +392,6 @@ mysqli_close($conn);
     var app = angular.module('shoppingCart', []);
 
     app.controller('shoppingCartController', function($scope, $http) {
-      <?php   //$id=$_GET['id']; ?>
         $scope.loadProduct = function() {
             $http.get('fetch.php?m=<?php  echo $_GET['m']; ?>').success(function(data) {
                 $scope.products = data;
