@@ -17,12 +17,12 @@ $url = "http://". $_SERVER["HTTP_HOST"];
 </head>
 
 <body>
-  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables(); setCategory();" class="d-flex bg-black text-light">
+  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables(); setCategory(); setPage();" class="d-flex bg-black text-light">
     <!-- left side -->
     <section class="d-flex flex-column col-2 align-items-center h-100vh w-75">
       <div class="mt-3 text-center">
-        <div class="h3">{{ date | date: 'hh:mm a'}}</div>
-        <div>{{ date  | date: 'dd MMM yyyy' }}</div>
+        <div class="h3">{{ date | date: 'hh:mm a' }}</div>
+        <div>{{ date | date: 'dd MMM yyyy' }}</div>
       </div>
       <!-- logo -->
       <h2 class="p-3 m-0"><i class="fa fas fa-utensils"></i></h2>
@@ -50,7 +50,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
               name="category-page" 
               aria-describedby="category_page"
               class="form-control"/>
-            <datalist id="category-pages">
+            <datalist id="category-pages" ng-repeat="p in counter">
                 <option value="1">
                 <option value="2">
                 <option value="3">
@@ -59,8 +59,8 @@ $url = "http://". $_SERVER["HTTP_HOST"];
             </datalist>
           </div>
           <div class="d-flex flex-row gap">
-            <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-down"></i></button>
-            <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-up"></i></button>
+            <button class="btn btn-outline-light rounded-pill" ng-click="pageDown()"><i class="fas fa-arrow-down"></i></button>
+            <button class="btn btn-outline-light rounded-pill" ng-click="pageUp()"><i class="fas fa-arrow-up"></i></button>
           </div>
         </div>
       </div>
@@ -188,22 +188,29 @@ $url = "http://". $_SERVER["HTTP_HOST"];
         <div class="btn btn-outline-light rounded-pill">9</div>
       </div>
     </section> <!-- end cart -->
+ 
   </main>
   <script>
     var app = angular.module('app', []);
     app.controller('controller', function($scope, $http) {
       $scope.date = new Date();
+      $scope.total_category_page = 1;
+      $scope.counter = 1;
       $scope.products = [];
       $scope.categories = [];
       $scope.tables = [];
       $scope.url = "<?= $url; ?>";
-      // category page number
-      $scope.categoryPage = null;
-      $scope.setCateoryPage = function(page) {
-        
+      $scope.fetchProducts = function(category) {
+        var c = category ? "&category=" + category : '';
+        $http.get($scope.url + "/product_action.php?action=products" + c)
+        .then( function(data) { 
+          $scope.products = data.data.data;
+          });
       }
+      // fetch category by pagination 
       // set category to fetch product by category
       $scope.category = null;
+      $scope.categoryPage = null;
       $scope.setCategory = function(category) {
         if(category) {
           $scope.category = category;
@@ -212,24 +219,30 @@ $url = "http://". $_SERVER["HTTP_HOST"];
           $scope.category = "Menus"
         }
       }
-      $scope.fetchProducts = function(category) {
-        var c = category ? "&category=" + category : '';
-        $http.get($scope.url + "/product_action.php?action=products" + c)
-        .then( function(data) { 
-          $scope.products = data.data.data;
-          })
-      }
-      // fetch category by pagination 
       $scope.skip = 7;
       $scope.page = 1;
       $scope.fetchCategories = function(page) {
         $http.get(`${$scope.url}/category_action.php?action=categories&page=${page}&skip=${$scope.skip}`)
         .then(function(data) { 
-          $scope.categories = data.data.data; 
+          $scope.categories = data.data.data;
+          $scope.total_category_page = data.data.total_page
           })
       }
+      $scope.pageDown = function() {
+        if($scope.page > 0){
+          $scope.page = $scope.page - 1;
+          $scope.fetchCategories($scope.page);
+        }
+        
+      }
+      $scope.pageUp = function() {
+        if($scope.page > 0){
+          $scope.page = $scope.page + 1;
+          $scope.fetchCategories($scope.page);
+        }
+      }
       $scope.setPage = function(page) {
-        $scope.page = page;
+        $scope.page = page ? page : 1;
         $scope.fetchCategories($scope.page);
       }
       // fetch tables
