@@ -17,7 +17,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
 </head>
 
 <body>
-  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables();" class="d-flex bg-dark text-light">
+  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables();" class="d-flex bg-black text-light">
     <!-- left side -->
     <section class="d-flex flex-column col-2 align-items-center h-100vh w-75">
       <!-- logo -->
@@ -33,9 +33,9 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       </div>
     </section>
     <!-- middle section -->
-    <section class="col-7 p-0">
+    <section class="col-7 p-0 bg-white">
       <!-- tables -->
-      <div class="align-items-baseline d-flex flex-row p-3 gap">
+      <div class="align-items-baseline d-flex flex-row p-3 gap bg-black">
         <div ng-repeat="t in tables">
           <div ng-class="{'bg-gradient-dark' : t.status === 'Enable'}" class="card text-dark text-center shadow-md" >
             <div class="card-body p-3" ng-class="{'text-light' : t.status === 'Enable'}" >
@@ -46,8 +46,8 @@ $url = "http://". $_SERVER["HTTP_HOST"];
         </div>
       </div>
       <!-- pagination -->
-      <section class="d-flex justify-content-center mb-2">
-        <nav aria-label="Page navigation">
+      <section class="d-flex justify-content-center my-2">
+        <nav aria-label="Page navigation mt-3">
           <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -58,19 +58,19 @@ $url = "http://". $_SERVER["HTTP_HOST"];
         </nav>
       </section>
       <!-- category name -->
-      <h2 class="text-center">Dinner</h2>
+      <h2 class="text-center text-black">Dinner</h2>
       <!-- products -->
       <section class="align-items-baseline d-flex flex-row p-3 gap">
         <div class="col-3 p-0" ng-repeat="p in products">
-          <div class="card text-black text-center bg-gray-400 shadow-md ">
+          <div class="card text-white text-center bg-gradient-dark shadow-md ">
             <div class="card-body px-2 py-3">
               <div class="card-title font-weight-bold">
                 <h5>{{p.product_name}}</h5>
               </div>
               <h1 class="align-content-center align-items-center border border-gray d-flex justify-content-center m-auto rounded-pill square"><i class="fas fa-utensils"></i></h1>
               <div class="d-flex flex-row justify-content-between align-items-center mt-1">
-                <div class="font-weight-light">Price: $ {{p.product_price}}</div>
-                <button class="btn btn-outline-dark rounded-pill"><i class="fas fa-plus"></i></button>
+                <div class="font-weight-light">Price: € {{p.product_price}}</div>
+                <button class="btn btn-outline-light rounded-pill"><i class="fas fa-plus"></i></button>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       </section>
     </section>
     <section class="col-3 w-100 h-auto pt-3 p-0">
-      <div class="zigzag text-black rounded d-flex flex-column py-3 mr-3 gap">
+      <div class="zigzag text-black rounded d-flex flex-column py-3 mx-3 gap">
         <!-- title -->
         <div class="px-3 border-bottom">
           <h5 class="m-0">Table 1</h5>
@@ -89,36 +89,43 @@ $url = "http://". $_SERVER["HTTP_HOST"];
           <div class="grid g-columns column justify-content-between text-black" ng-repeat="p in products">
             <div class="text-black">
               <div class="fs-s strong">{{p.product_name}}</div>
-              <div class="fs-s">Price: <strong>$ {{p.product_price}}</strong></div>
+              <div class="fs-s">Price: <strong>€ {{p.product_price}}</strong></div>
             </div>
             <div class="text-right fs-s">1</div>
-            <div class="text-left pl-3 fs-s">$ {{p.product_price * 1}}</div>
+            <div class="text-left pl-3 fs-s">€ {{p.product_price * 1}}</div>
           </div>
         </div>
         <!-- subtotal -->
         <div class="px-3 border-bottom">
           <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
             <h6 class="font-weight-bold m-0">Subtotal:</h6>
-            <div class="text-left pl-1">$ 22.0</div>
+            <div class="text-left pl-1">€ 22.0</div>
           </div>
           <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
             <h6 class="m-0">Tax:</h6>
-            <div class="text-left pl-1">$ 2.0</div>
+            <div class="text-left pl-1">€ 2.0</div>
           </div>
         </div>
         <!-- total -->
         <div class="px-3 border-bottom">
           <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
             <h6 class="m-0">Total:</h6>
-            <div class="text-left pl-1">$ 24.0</div>
+            <div class="text-left pl-1">€ 24.0</div>
           </div>
         </div>
         <!-- checkout -->
         <div class="px-3 d-flex flex-row gap justify-content-center">
-          <button class="btn btn-success rounded-pill">Checkout</button>
+          <button class="btn btn-dark rounded-pill">Checkout</button>
           <button class="btn btn-outline-secondary rounded-pill">Cancel</button>
         </div>
-      </div>  
+      </div>
+      <div class="d-flex flex-row p-1 gap">
+        <div class="btn btn-outline-light">Different Pay</div>
+        <div class="btn btn-outline-light px-3">€</div>
+      </div>
+      <div class="grid">
+
+      </div>
     </section> <!-- end cart -->
   </main>
   <script>

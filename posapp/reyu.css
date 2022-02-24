@@ -13,7 +13,7 @@
 }
 .zigzag {
   background: linear-gradient(-135deg, #ffffff 5px, transparent 0) 0 5px,
-    linear-gradient(135deg, #ffffff 5px, #5a5c69 0) 0 5px;
+    linear-gradient(135deg, #ffffff 5px, black 0) 0 5px;
   background-color: #ffffff;
   background-position: left bottom;
   background-repeat: repeat-x;
