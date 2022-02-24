@@ -14,8 +14,11 @@ if(isset($_GET["action"]) && $_GET["action"] == "products"){
 
 	$main_query = "SELECT * FROM product_table ";
 
+	$category = '';
+	if(isset($_GET["category"])) {
+		$category .= 'WHERE category_name LIKE "%'.$_GET["category"].'%" ';
+	}
 	$search_query = '';
-
 	if(isset($_POST["search"]["value"]))
 	{
 		$search_query .= 'WHERE category_name LIKE "%'.$_POST["search"]["value"].'%" ';
@@ -40,7 +43,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "products"){
 		$limit_query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
 	}
 
-	$object->query = $main_query . $search_query . $order_query;
+	$object->query = $main_query . $category . $search_query . $order_query;
 
 	$object->execute();
 

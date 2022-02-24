@@ -28,10 +28,38 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       <h2 class="p-3 m-0"><i class="fa fas fa-utensils"></i></h2>
       <!-- categories -->
       <div class="d-flex flex-column justify-content-center align-content-center align-items-center gap w-100">
-        <div class="p-1 btn btn-outline-light w-100 rounded-pill" ng-repeat="c in categories">{{c.category_name}}</div>
-        <div class="d-flex flex-row gap">
-          <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-down"></i></button>
-          <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-up"></i></button>
+        <div class="d-flex flex-column justify-content-center gap w-100">
+          <div 
+          class="p-1 btn btn-outline-light w-100 rounded-pill" 
+          ng-repeat="c in categories" 
+          ng-click="setCategory(c.category_name)">
+            {{c.category_name}}
+          </div>
+        </div>
+        <div class="d-flex flex-column gap align-items-center mt-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Page</span>
+            </div>
+            <input list="category-pages"
+              onfocus="this.value=''" 
+              onchange="this.blur();" 
+              id="category-page" 
+              name="category-page" 
+              aria-label="Select catgeory page" 
+              class="form-control"/>
+            <datalist id="category-pages">
+                <option value="1">
+                <option value="2">
+                <option value="3">
+                <option value="4">
+                <option value="5">
+            </datalist>
+          </div>
+          <div>
+            <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-down"></i></button>
+            <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-up"></i></button>
+          </div>
         </div>
       </div>
       <!-- admin and logout btn  -->
@@ -41,9 +69,9 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       </div>
     </section>
     <!-- middle section -->
-    <section class="col-7 p-0 bg-white d-flex flex-column">
+    <section class="col-7 p-0 bg-black d-flex flex-column">
       <!-- tables -->
-      <div class="align-items-baseline d-flex flex-row p-3 gap bg-black">
+      <div class="align-items-baseline d-flex flex-row p-3 gap">
         <div ng-repeat="t in tables">
           <div ng-class="{'bg-gradient-dark' : t.status === 'Enable'}" class="card text-dark text-center shadow-md" >
             <div class="card-body p-3" ng-class="{'text-light' : t.status === 'Enable'}" >
@@ -53,39 +81,41 @@ $url = "http://". $_SERVER["HTTP_HOST"];
           </div>
         </div>
       </div>
-      <!-- pagination -->
-      <section class="d-flex justify-content-center my-2">
-        <nav aria-label="Page navigation mt-3">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-        </nav>
-      </section>
-      <!-- category name -->
-      <h2 class="text-center text-black">Dinner</h2>
-      <!-- products -->
-      <section class="align-items-baseline d-flex flex-row p-3 gap">
-        <div class="col-3 p-0" ng-repeat="p in products">
-          <div class="card text-white text-center bg-gradient-dark shadow-md ">
-            <div class="card-body px-2 py-3">
-              <div class="card-title font-weight-bold">
-                <h5>{{p.product_name}}</h5>
-              </div>
-              <h1 class="align-content-center align-items-center border border-gray d-flex justify-content-center m-auto rounded-pill square"><i class="fas fa-utensils"></i></h1>
-              <div class="d-flex flex-row justify-content-between align-items-center mt-1">
-                <div class="font-weight-light">Price: € {{p.product_price}}</div>
-                <button class="btn btn-outline-light rounded-pill"><i class="fas fa-plus"></i></button>
+      <section class="d-flex flex-column bg-white h-100 rounded">
+        <!-- pagination -->
+        <section class="d-flex justify-content-center my-2">
+          <nav aria-label="Page navigation mt-3">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+        </section>
+        <!-- category name -->
+        <h2 class="text-center text-black">Dinner</h2>
+        <!-- products -->
+        <section class="align-items-baseline d-flex flex-row p-3 gap">
+          <div class="col-3 p-0" ng-repeat="p in products">
+            <div class="card text-white text-center bg-gradient-dark shadow-md ">
+              <div class="card-body px-2 py-3">
+                <div class="card-title font-weight-bold">
+                  <h5>{{p.product_name}}</h5>
+                </div>
+                <h1 class="align-content-center align-items-center border border-gray d-flex justify-content-center m-auto rounded-pill square"><i class="fas fa-utensils"></i></h1>
+                <div class="d-flex flex-row justify-content-between align-items-center mt-1">
+                  <div class="font-weight-light">Price: € {{p.product_price}}</div>
+                  <button class="btn btn-outline-light rounded-pill"><i class="fas fa-plus"></i></button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
       <!-- buttons  -->
-      <section class="align-items-baseline d-flex flex-row p-3 gap bg-black mt-auto justify-content-center">
+      <section class="align-items-baseline d-flex flex-row p-3 gap mt-auto justify-content-center">
         <button class="btn btn-outline-light rounded-pill">Cash Drawer</button>
         <button class="btn btn-outline-light rounded-pill">Customers</button>
         <button class="btn btn-outline-light rounded-pill">Subtotal</button>
@@ -165,12 +195,19 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       $scope.categories = [];
       $scope.tables = [];
       $scope.url = "<?= $url; ?>";
+      $scope.category = null;
+      $scope.setCategory = function(category) {
+        $scope.category = category;
+        $scope.fetchProducts();
+      }
       $scope.fetchProducts = function() {
-        $http.get($scope.url+"/product_action.php?action=products")
+        var category = $scope.category ? '' : "&" + $scope.category;
+        $http.get($scope.url+"/product_action.php?action=products" + category)
         .then( function(data) { 
           $scope.products = data.data.data;
           })
       }
+      
       $scope.fetchCategories = function() {
         $http.get($scope.url+"/category_action.php?action=categories")
         .then( function(data) { 
