@@ -42,11 +42,12 @@ $url = "http://". $_SERVER["HTTP_HOST"];
               <span class="input-group-text" id="category_page">Page</span>
             </div>
             <input list="category-pages"
+              ng-model="page"
               onfocus="this.value=''" 
-              onchange="this.blur();" 
+              onchange="this.blur();"
+              ng-change="setPage(page);" 
               id="category-page" 
               name="category-page" 
-              aria-label="Select catgeory page" 
               aria-describedby="category_page"
               class="form-control"/>
             <datalist id="category-pages">
@@ -218,13 +219,20 @@ $url = "http://". $_SERVER["HTTP_HOST"];
           $scope.products = data.data.data;
           })
       }
-      
-      $scope.fetchCategories = function() {
-        $http.get($scope.url+"/category_action.php?action=categories")
-        .then( function(data) { 
+      // fetch category by pagination 
+      $scope.skip = 7;
+      $scope.page = 1;
+      $scope.fetchCategories = function(page) {
+        $http.get(`${$scope.url}/category_action.php?action=categories&page=${page}&skip=${$scope.skip}`)
+        .then(function(data) { 
           $scope.categories = data.data.data; 
           })
       }
+      $scope.setPage = function(page) {
+        $scope.page = page;
+        $scope.fetchCategories($scope.page);
+      }
+      // fetch tables
       $scope.fetchTables = function() {
         $http.get($scope.url+"/table_action.php?action=tables")
         .then( function(data) { 

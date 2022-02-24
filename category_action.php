@@ -12,43 +12,47 @@ if(isset($_GET["action"]) && $_GET["action"] == 'categories')
 		$output = array();
 
 		$main_query = "SELECT * FROM product_category_table ";
-
-		if(isset($_POST["order"]))
-		{
-			$order_query = 'ORDER BY '.$order_column[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' ';
-		}
-		else
-		{
-			$order_query = 'ORDER BY category_id DESC ';
-		}
-
-		$object->query = $main_query . $order_query;
-
-		$object->execute();
-
-		$filtered_rows = $object->row_count();
-
-		$result = $object->get_result();
-
 		$object->query = $main_query;
-
 		$object->execute();
+		if(isset($_GET["order"])) {
+			$order_query = ' ORDER BY '.$order_column[$_GET['order']['0']['column']].' '.$_GET['order']['0']['dir'].' ';
+		}
+		else {
+			$order_query = " ORDER BY category_id ASC ";
+		}
+		// pagination
+		if(isset($_GET["page"]) && isset($_GET["skip"])) {
+			$page = 1;
+			if (isset($_GET['page'])) {
+				$page = filter_var($_GET['page'], FILTER_SANITIZE_NUMBER_INT);
+			}
+			$skip = (int)$_GET["skip"] ?? 10;
+			$per_page = $skip;
+			$total_rows = $object->row_count();
+			$total_pages = ceil($total_rows / $per_page);
+			$offset = ($page-1) * $per_page;
+			$limit_query = '';
+			$total_pages = ceil($total_rows / $per_page);
+			$limit_query = " LIMIT  $offset , $per_page ";
+		}
 
-		$total_rows = $object->row_count();
-
+		$object->query = $main_query . $order_query . $limit_query;
+		$object->execute();
+		$filtered_rows = $object->row_count();
+		$result = $object->get_result();
+		$object->query = $main_query;
+		$object->execute();
 		$data = array();
-
-		foreach($result as $row)
-		{
+		foreach($result as $row) {
 			$sub_array = array();
 			$sub_array['category_id'] = $row["category_id"];
 			$sub_array['category_name'] = html_entity_decode($row["category_name"]);
 			$sub_array['category_status'] = $row["category_status"];
 			$data[] = $sub_array;
 		}
-
 		$output = array(
-			"recordsTotal"  	=>  $total_rows,
+			"total_records"  	=>  $total_rows,
+			"total_page" => $total_pages,
 			"recordsFiltered" 	=> 	$filtered_rows,
 			"data"    			=> 	$data
 		);
@@ -284,5 +288,3 @@ if(isset($_POST["action"]))
 		echo '<div class="alert alert-success">Category Deleted</div>';
 	}
 }
-
-?>
