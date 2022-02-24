@@ -37,8 +37,8 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       <!-- tables -->
       <div class="align-items-baseline d-flex flex-row p-3 gap">
         <div ng-repeat="t in tables">
-          <div ng-class="{'bg-gradient-primary' : t.status === 'Enable'}" class="card text-dark text-center shadow-md" >
-            <div class="card-body" ng-class="{'text-light' : t.status === 'Enable'}" >
+          <div ng-class="{'bg-gradient-dark' : t.status === 'Enable'}" class="card text-dark text-center shadow-md" >
+            <div class="card-body p-3" ng-class="{'text-light' : t.status === 'Enable'}" >
               <div class="card-title"><h4>{{t.name}}</h4></div>
               <div > {{t.capacity}} </div>
             </div>
@@ -62,15 +62,15 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       <!-- products -->
       <section class="align-items-baseline d-flex flex-row p-3 gap">
         <div class="col-3 p-0" ng-repeat="p in products">
-          <div class="card text-dark text-center bg-gray-100 shadow-md">
-            <div class="card-body">
+          <div class="card text-black text-center bg-gray-400 shadow-md ">
+            <div class="card-body px-2 py-3">
               <div class="card-title font-weight-bold">
                 <h5>{{p.product_name}}</h5>
               </div>
               <h1 class="align-content-center align-items-center border border-gray d-flex justify-content-center m-auto rounded-pill square"><i class="fas fa-utensils"></i></h1>
               <div class="d-flex flex-row justify-content-between align-items-center mt-1">
                 <div class="font-weight-light">Price: $ {{p.product_price}}</div>
-                <button class="btn btn-outline-primary rounded-pill"><i class="fas fa-plus"></i></button>
+                <button class="btn btn-outline-dark rounded-pill"><i class="fas fa-plus"></i></button>
               </div>
             </div>
           </div>
@@ -78,22 +78,48 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       </section>
     </section>
     <section class="col-3 w-100 h-auto pt-3 p-0">
-      <div class="zigzag text-dark rounded d-flex flex-column p-3">
-        <div class="p-3">
-          <h5>Table 1</h5>
+      <div class="zigzag text-black rounded d-flex flex-column py-3 mr-3 gap">
+        <!-- title -->
+        <div class="px-3 border-bottom">
+          <h5 class="m-0">Table 1</h5>
           <p class="p-0 m-0">John Doe</p>
         </div>
-        <hr class="w-100 m-0">
-        <div class="d-flex flex-row p-3 justify-content-between">
-          <div>
-            <h6>Eggs</h6>
-            <h6>Price: <strong>$ 5.00</strong></h6>
+        <!-- cart -->
+        <div class="px-3 border-bottom">
+          <div class="grid g-columns column justify-content-between text-black" ng-repeat="p in products">
+            <div class="text-black">
+              <div class="fs-s strong">{{p.product_name}}</div>
+              <div class="fs-s">Price: <strong>$ {{p.product_price}}</strong></div>
+            </div>
+            <div class="text-right fs-s">1</div>
+            <div class="text-left pl-3 fs-s">$ {{p.product_price * 1}}</div>
           </div>
-          <div>1</div>
-          <div>$ 5.00</div>
         </div>
-      </div>
-    </section>
+        <!-- subtotal -->
+        <div class="px-3 border-bottom">
+          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
+            <h6 class="font-weight-bold m-0">Subtotal:</h6>
+            <div class="text-left pl-1">$ 22.0</div>
+          </div>
+          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
+            <h6 class="m-0">Tax:</h6>
+            <div class="text-left pl-1">$ 2.0</div>
+          </div>
+        </div>
+        <!-- total -->
+        <div class="px-3 border-bottom">
+          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
+            <h6 class="m-0">Total:</h6>
+            <div class="text-left pl-1">$ 24.0</div>
+          </div>
+        </div>
+        <!-- checkout -->
+        <div class="px-3 d-flex flex-row gap justify-content-center">
+          <button class="btn btn-success rounded-pill">Checkout</button>
+          <button class="btn btn-outline-secondary rounded-pill">Cancel</button>
+        </div>
+      </div>  
+    </section> <!-- end cart -->
   </main>
   <script>
     var app = angular.module('app', []);

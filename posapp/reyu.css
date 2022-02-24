@@ -20,4 +20,24 @@
   background-size: 10px 10px;
 }
 .grid {
+  display: grid;
+}
+.column {
+  grid-auto-flow: column;
+}
+.g-columns {
+  --c: 3fr 1fr 1fr;
+  grid-template-columns: var(--c);
+}
+.bg-black {
+  background-color: black;
+}
+.text-black {
+  color: black;
+}
+.fs-s {
+  font-size: 13px;
+}
+.strong {
+  font-weight: 700;
 }
