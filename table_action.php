@@ -38,7 +38,6 @@ if(isset($_GET["action"])) {
 			$limit_query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
 		}
 
-		// $object->query = $main_query ;
 		$object->query = $main_query . $search_query . $order_query;
 
 		$object->execute();

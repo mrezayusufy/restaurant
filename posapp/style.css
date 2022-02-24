@@ -1,148 +1,154 @@
 /* Global Styles */
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover,
 a:visited {
-    color: white;
+  color: white;
 }
 
 .btn-bg-1 {
-    background-color: #7d3d19;
+  background-color: #7d3d19;
 }
 
 .btn-bg-2 {
-    background-color: #7c7b00;
+  background-color: #7c7b00;
 }
 
 .btn-bg-3 {
-    background-color: #092056;
+  background-color: #092056;
 }
 
 .btn-bg-4 {
-    background-color: #bf5f2e;
+  background-color: #bf5f2e;
 }
 
 .btn-effect {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    background-image: linear-gradient( rgba(255, 255, 255, .5) 0%, 20%, transparent 50%);
-    border: 1px solid #817778;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.5) 0%,
+    20%,
+    transparent 50%
+  );
+  border: 1px solid #817778;
 }
-
+.h-100vh {
+  height: 100vh;
+}
+.gap {
+  gap: 10px;
+}
 main {
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
-    background-image: url(images/background.jpg);
-    background-position: center;
-    height: 100vh;
-    width: 100%;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background-image: url(images/background.jpg);
+  background-position: center;
+  height: 100vh;
+  width: 100%;
 }
 
 .content {
-    background: rgba(88, 103, 125, 0.7);
-    /* rgba(5, 0, 8, ); */
-    backdrop-filter: blur( 10px);
-    -webkit-backdrop-filter: blur( 10px);
-    border: 1px solid rgba( 255, 255, 255, 0.18);
-    width: 100%;
-    height: 100%;
+  background: rgba(88, 103, 125, 0.7);
+  /* rgba(5, 0, 8, ); */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 100%;
+  height: 100%;
 }
-
 
 /* Left sidebar 
 ********************/
 
 .left-sidebar {
-    width: 20%;
+  width: 20%;
 }
 
 .clock {
-    background-color: #d77036;
-    color: black;
-    font-size: 2rem;
+  background-color: #d77036;
+  color: black;
+  font-size: 2rem;
 }
 
 .menus {
-    background: linear-gradient(#60a4bb 0%, #006f94 50%);
-    border-radius: none;
-    border: 1px solid #5c687a;
+  background: linear-gradient(#60a4bb 0%, #006f94 50%);
+  border-radius: none;
+  border: 1px solid #5c687a;
 }
 
 .menu {
-    background: none;
-    border: none;
-    border-radius: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
 }
 
 .menu .active {
-    color: black;
-    font-weight: bold;
+  color: black;
+  font-weight: bold;
 }
-
 
 /* Middle contents 
 ********************/
 
 .table-menu {
-    background-color: #ac2e2e;
+  background-color: #ac2e2e;
 }
 
 .pagination a {
-    background-color: #43765d;
+  background-color: #43765d;
 }
 
 .item-btn {
-    width: calc(100%/5);
-    height: 50px;
-    color: white;
+  width: calc(100% / 5);
+  height: 50px;
+  color: white;
 }
 
 .action-btn {
-    backdrop-filter: blur( 5px);
-    -webkit-backdrop-filter: blur( 5px);
-    width: 80px;
-    height: 40px;
-    color: white;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  width: 80px;
+  height: 40px;
+  color: white;
 }
 
 .action-btn:hover {
-    background-color: rgba(65, 73, 90, .9);
+  background-color: rgba(65, 73, 90, 0.9);
 }
-
 
 /* Right sidebar 
 ********************/
 
 .right-sidebar {
-    width: 25%;
+  width: 25%;
 }
 
 .right-sidebar .action-btn {
-    background-color: rgba(65, 73, 90, 0.616);
-    backdrop-filter: blur( 5px);
-    -webkit-backdrop-filter: blur( 5px);
-    width: 65%;
+  background-color: rgba(65, 73, 90, 0.616);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  width: 65%;
 }
 
 .bucket {
-    background-color: #ccced4;
-    height: 55%;
-    font-weight: bold;
-    font-size: 0.9rem;
+  background-color: #ccced4;
+  height: 55%;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .num-btn {
-    backdrop-filter: blur( 5px);
-    -webkit-backdrop-filter: blur( 5px);
-    color: white;
-    width: 60px;
-    height: 60px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+  width: 60px;
+  height: 60px;
 }
 
 .num-btn:hover {
-    background-color: rgba(65, 73, 90, .9);
+  background-color: rgba(65, 73, 90, 0.9);
 }
