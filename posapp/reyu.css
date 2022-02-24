@@ -2,6 +2,10 @@
   --g: 10px;
   gap: var(--g);
 }
+.h {
+  --h: 180px;
+  height: var(--h);
+}
 .h-100vh {
   height: 100vh;
 }

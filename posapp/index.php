@@ -95,14 +95,15 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       </section>
     </section>
     <section class="col-3 w-100 h-auto pt-3 p-0">
-      <div class="zigzag text-black rounded d-flex flex-column py-3 mx-3 gap">
+      <!-- cart -->
+      <div class="zigzag text-black rounded d-flex flex-column py-3 mx-3 gap" style="--g:5px;">
         <!-- title -->
         <div class="px-3 border-bottom">
           <h5 class="m-0">Table 1</h5>
           <p class="p-0 m-0">John Doe</p>
         </div>
         <!-- cart -->
-        <div class="px-3 border-bottom">
+        <div class="px-3 border-bottom h overflow-hidden">
           <div class="grid g-columns column justify-content-between text-black" ng-repeat="p in products">
             <div class="text-black">
               <div class="fs-s strong">{{p.product_name}}</div>
@@ -136,11 +137,11 @@ $url = "http://". $_SERVER["HTTP_HOST"];
           <button class="btn btn-outline-secondary rounded-pill">Cancel</button>
         </div>
       </div>
-      <div class="d-flex flex-row p-3 gap">
+      <div class="d-flex flex-row py-2 px-3 gap">
         <div class="btn btn-outline-light grow-3 rounded-pill">Different Pay</div>
         <div class="btn btn-outline-light px-3 rounded-pill">€</div>
       </div>
-      <div class="grid column g-columns g-rows gap mx-4 align-items-center justify-content-center" style="--c: 40px 40px 40px 40px; --g: 15px;">
+      <div class="grid column g-columns g-rows gap mx-4 align-items-center justify-content-center" style="--c: 40px 40px 40px 40px;">
         <div class="btn btn-outline-light rounded-pill">0</div>
         <div class="btn btn-outline-light rounded-pill">c</div>
         <div class="btn btn-outline-light rounded-pill">,</div>
