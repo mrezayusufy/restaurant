@@ -1,0 +1,23 @@
+.gap {
+  gap: 10px;
+}
+.h-100vh {
+  height: 100vh;
+}
+.shadow-md {
+  box-shadow: 10px 10px 15px -15px #3a3b45;
+}
+.square {
+  width: 110px;
+  height: 110px;
+}
+.zigzag {
+  background: linear-gradient(-135deg, #ffffff 5px, transparent 0) 0 5px,
+    linear-gradient(135deg, #ffffff 5px, #5a5c69 0) 0 5px;
+  background-color: #ffffff;
+  background-position: left bottom;
+  background-repeat: repeat-x;
+  background-size: 10px 10px;
+}
+.grid {
+}
