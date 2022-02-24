@@ -3,10 +3,10 @@
 //add_item.php
 
 session_start();
-$product_data = json_decode(file_get_contents("php://input"));
-$product_id = $product_data->id;
-$product_name = $product_data->name;
-$product_price = $product_data->price;
+$data = json_decode(file_get_contents("php://input"));
+$product_id = $data->product_id;
+$product_name = $data->product_name;
+$product_price = $data->product_price;
 
 if(isset($_SESSION["shopping_cart"]))
 {
@@ -22,10 +22,10 @@ if(isset($_SESSION["shopping_cart"]))
 	if($is_available == 0)
 	{
 		$item_array = array(
-			'product_id'               =>     $product_id,  
-			'product_name'             =>     $product_name,  
-			'product_price'            =>     $product_price,  
-			'product_quantity'         =>     1
+			'product_id'               => $product_id,  
+			'product_name'             => $product_name,  
+			'product_price'            => $product_price,  
+			'product_quantity'         => 1
 		);
 		$_SESSION["shopping_cart"][] = $item_array;
 	}
@@ -41,6 +41,5 @@ else
 	$_SESSION["shopping_cart"][] = $item_array;
 	
 }
-//print_r($_SESSION["shopping_cart"]);
 
 ?>

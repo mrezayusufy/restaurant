@@ -53,3 +53,22 @@
 .strong {
   font-weight: 700;
 }
+.btn-black {
+  color: white;
+  background-color: black;
+  border-color: hsl(0, 0%, 5%);
+}
+.btn-black:hover {
+  color: white;
+  background-color: hsl(0, 0%, 10%);
+  border-color: hsl(0, 0%, 10%);
+}
+.border-left-black {
+  border-left: 0.25rem solid #000 !important;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}

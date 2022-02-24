@@ -1,15 +1,11 @@
 <?php
 
-//order_action.php
-
 include('rms.php');
 
 $object = new rms();
 
-if(isset($_POST["action"]))
-{
-	if($_POST["action"] == 'reset')
-	{
+if (isset($_POST["action"])) {
+	if ($_POST["action"] == 'reset') {
 		$object->query = "SELECT * FROM table_data 
 		WHERE table_status = 'Enable' 
 		ORDER BY table_id ASC";
@@ -18,55 +14,46 @@ if(isset($_POST["action"]))
 
 		$html = '';
 
-		foreach($table_result as $table)
-		{
+		foreach ($table_result as $table) {
 			$object->query = "SELECT * FROM order_table 
-			WHERE order_table = '".$table['table_name']."' 
+			WHERE order_table = '" . $table['table_name'] . "' 
 			AND order_status = 'In Process'
 			";
-			
+
 			$object->execute();
 
-			if($object->row_count() > 0)
-			{
+			if ($object->row_count() > 0) {
 				$order_result = $object->statement_result();
-				foreach($order_result as $order)
-				{
+				foreach ($order_result as $order) {
 					$html .= '
-					<button type="button" name="table_button" id="table_'.$table["table_id"].'" class="btn btn-warning mb-4 table_button" data-index="'.$table["table_id"].'" data-order_id="'.$order["order_id"].'" data-table_name="'.$table["table_name"].'">'.$table["table_name"].'<br />'.$table["table_capacity"].' Person</button>
+					<button type="button" name="table_button" id="table_' . $table["table_id"] . '" class="btn btn-warning mb-4 table_button" data-index="' . $table["table_id"] . '" data-order_id="' . $order["order_id"] . '" data-table_name="' . $table["table_name"] . '">' . $table["table_name"] . '<br />' . $table["table_capacity"] . ' Person</button>
 					';
 				}
-			}
-			else
-			{
+			} else {
 				$html .= '
-				<button type="button" name="table_button" id="table_'.$table["table_id"].'" class="btn btn-secondary mb-4 table_button" data-index="'.$table["table_id"].'" data-order_id="0" data-table_name="'.$table["table_name"].'">'.$table["table_name"].'<br />'.$table["table_capacity"].' Person</button>
+				<button type="button" name="table_button" id="table_' . $table["table_id"] . '" class="btn btn-secondary mb-4 table_button" data-index="' . $table["table_id"] . '" data-order_id="0" data-table_name="' . $table["table_name"] . '">' . $table["table_name"] . '<br />' . $table["table_capacity"] . ' Person</button>
 				';
 			}
 		}
 		echo $html;
 	}
 
-	if($_POST["action"] == 'load_product')
-	{
+	if ($_POST["action"] == 'load_product') {
 		$object->query = "
 		SELECT * FROM product_table 
-		WHERE category_name = '".$_POST['category_name']."' 
+		WHERE category_name = '" . $_POST['category_name'] . "' 
 		AND product_status = 'Enable'
 		";
 		$result = $object->get_result();
 		$html = '<option value="">Select Product</option>';
-		foreach($result as $row)
-		{
-			$html .= '<option value="'.$row["product_name"].'" data-price="'.$row["product_price"].'">'.$row["product_name"].'</option>';
+		foreach ($result as $row) {
+			$html .= '<option value="' . $row["product_name"] . '" data-price="' . $row["product_price"] . '">' . $row["product_name"] . '</option>';
 		}
 		echo $html;
 	}
 
-	if($_POST["action"] == 'Add')
-	{
-		if($_POST['hidden_order_id'] > 0)
-		{
+	if ($_POST["action"] == 'Add') {
+		if ($_POST['hidden_order_id'] > 0) {
 			$product_amount = $_POST['product_quantity'] * $_POST['hidden_product_rate'];
 
 			$item_data = array(
@@ -84,9 +71,7 @@ if(isset($_POST["action"]))
 			";
 			$object->execute($item_data);
 			echo $_POST['hidden_order_id'];
-		}
-		else
-		{
+		} else {
 			$order_data = array(
 				':order_number'			=>	$object->Generate_order_no(),
 				':order_table'			=>	$_POST['hidden_table_name'],
@@ -129,8 +114,7 @@ if(isset($_POST["action"]))
 		}
 	}
 
-	if($_POST["action"] == "fetch_order")
-	{
+	if ($_POST["action"] == "fetch_order") {
 		$order_id = $_POST['order_id'];
 		$object->query = "SELECT * FROM order_item_table WHERE order_id = $order_id ORDER BY order_item_id ASC";
 		$result = $object->get_result();
@@ -144,15 +128,14 @@ if(isset($_POST["action"]))
 				<th>Action</th>
 			</tr>
 		';
-		foreach($result as $row)
-		{
+		foreach ($result as $row) {
 			$html .= '
 			<tr>
-				<td>'.$row["product_name"].'</td>
-				<td><input type="number" class="form-control product_quantity" data-item_id="'.$row["order_item_id"].'" data-order_id="'.$row["order_id"].'" data-rate="'.$row["product_rate"].'" min="1" max="25" value="'.$row["product_quantity"].'" /></td>
-				<td>'.$object->cur . $row["product_rate"].'</td>
-				<td><span id="product_amount_'.$row["order_item_id"].'">'.$object->cur . $row["product_amount"].'</span></td>
-				<td><button type="button" name="remove" class="btn btn-danger btn-sm remove_item" data-item_id="'.$row["order_item_id"].'" data-order_id="'.$row["order_id"].'"><i class="fas fa-minus-square"></i></button></td>
+				<td>' . $row["product_name"] . '</td>
+				<td><input type="number" class="form-control product_quantity" data-item_id="' . $row["order_item_id"] . '" data-order_id="' . $row["order_id"] . '" data-rate="' . $row["product_rate"] . '" min="1" max="25" value="' . $row["product_quantity"] . '" /></td>
+				<td>' . $object->cur . $row["product_rate"] . '</td>
+				<td><span id="product_amount_' . $row["order_item_id"] . '">' . $object->cur . $row["product_amount"] . '</span></td>
+				<td><button type="button" name="remove" class="btn btn-danger btn-sm remove_item" data-item_id="' . $row["order_item_id"] . '" data-order_id="' . $row["order_id"] . '"><i class="fas fa-minus-square"></i></button></td>
 			</tr>
 			';
 		}
@@ -162,49 +145,45 @@ if(isset($_POST["action"]))
 		echo $html;
 	}
 
-	if($_POST['action'] == 'change_quantity')
-	{
+	if ($_POST['action'] == 'change_quantity') {
 		$object->query = "
 		UPDATE order_item_table 
-		SET product_quantity = '".$_POST["quantity"]."', 
-		product_amount = '".$_POST["quantity"] * $_POST["rate"]."' 
-		WHERE order_id = '".$_POST["order_id"]."' 
-		AND order_item_id = '".$_POST["item_id"]."'
+		SET product_quantity = '" . $_POST["quantity"] . "', 
+		product_amount = '" . $_POST["quantity"] * $_POST["rate"] . "' 
+		WHERE order_id = '" . $_POST["order_id"] . "' 
+		AND order_item_id = '" . $_POST["item_id"] . "'
 		";
 		$object->execute();
 	}
 
-	if($_POST['action'] == 'remove_item')
-	{
+	if ($_POST['action'] == 'remove_item') {
 		$object->query = "
 		DELETE FROM order_item_table 
-		WHERE order_id = '".$_POST["order_id"]."' 
-		AND order_item_id = '".$_POST["item_id"]."'
+		WHERE order_id = '" . $_POST["order_id"] . "' 
+		AND order_item_id = '" . $_POST["item_id"] . "'
 		";
 
 		$object->execute();
 
 		$object->query = "
 		SELECT order_item_id FROM order_item_table 
-		WHERE order_id = '".$_POST["order_id"]."'
+		WHERE order_id = '" . $_POST["order_id"] . "'
 		";
 
 		$object->execute();
 
 		echo $object->row_count();
 
-		if($object->row_count() == 0)
-		{
+		if ($object->row_count() == 0) {
 			$object->query = "
 			DELETE FROM order_table 
-			WHERE order_id = '".$_POST["order_id"]."'
+			WHERE order_id = '" . $_POST["order_id"] . "'
 			";
 			$object->execute();
 		}
 	}
 
-	if($_POST["action"] == 'dashboard_reset')
-	{
+	if ($_POST["action"] == 'dashboard_reset') {
 		$object->query = "SELECT * FROM table_data 
 		WHERE table_status = 'Enable' 
 		ORDER BY table_id ASC
@@ -214,41 +193,36 @@ if(isset($_POST["action"]))
 
 		$html = '<div class="row">';
 
-		foreach($table_result as $table)
-		{
+		foreach ($table_result as $table) {
 			$object->query = "
 			SELECT * FROM order_table 
-			WHERE order_table = '".$table['table_name']."' 
+			WHERE order_table = '" . $table['table_name'] . "' 
 			AND order_status = 'In Process'
 			";
-			
+
 			$object->execute();
 
-			if($object->row_count() > 0)
-			{
+			if ($object->row_count() > 0) {
 				$order_result = $object->statement_result();
-				foreach($order_result as $order)
-				{
+				foreach ($order_result as $order) {
 					$html .= '
 					<div class="col-lg-2 mb-3">
 						<div class="card bg-info text-white shadow">
 							<div class="card-body">
-								'.$table["table_name"].'
+								' . $table["table_name"] . '
 								<div class="mt-1 text-white-50 small">Booked</div>
 							</div>
 						</div>
 					</div>
 					';
 				}
-			}
-			else
-			{
+			} else {
 				$html .= '
 				<div class="col-lg-2 mb-3">
 					<div class="card bg-light text-black shadow">
 						<div class="card-body">
-							'.$table["table_name"].'
-							<div class="mt-1 text-black-50 small">'.$table["table_capacity"].' Person</div>
+							' . $table["table_name"] . '
+							<div class="mt-1 text-black-50 small">' . $table["table_capacity"] . ' Person</div>
 						</div>
 					</div>
 				</div>
@@ -257,7 +231,4 @@ if(isset($_POST["action"]))
 		}
 		echo $html;
 	}
-
 }
-
-?>

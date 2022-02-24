@@ -29,11 +29,11 @@ if(isset($_GET["action"]) && $_GET["action"] == "products"){
 
 	if(isset($_POST["order"]))
 	{
-		$order_query = 'ORDER BY '.$order_column[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' ';
+		$order_query = ' ORDER BY '.$order_column[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' ';
 	}
 	else
 	{
-		$order_query = 'ORDER BY product_id DESC ';
+		$order_query = ' ORDER BY product_id DESC ';
 	}
 
 	$limit_query = '';
@@ -63,6 +63,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "products"){
 	foreach($result as $row)
 	{
 		$sub_array = array();
+		$sub_array['product_id'] = $row["product_id"];
 		$sub_array['product_name'] = html_entity_decode($row["product_name"]);
 		$sub_array['product_price'] = $row["product_price"];
 		$sub_array['category_name'] = $row["category_name"];
@@ -70,9 +71,9 @@ if(isset($_GET["action"]) && $_GET["action"] == "products"){
 		$data[] = $sub_array;
 	}
 	$output = array(
-		"recordsTotal"  	=>  $total_rows,
+		"recordsTotal"  		=>  $total_rows,
 		"recordsFiltered" 	=> 	$filtered_rows,
-		"data"    			=> 	$data
+		"data"							=> 	$data
 	);
 		
 	echo json_encode($output);
@@ -98,11 +99,11 @@ if(isset($_POST["action"])){
 
 		if(isset($_POST["order"]))
 		{
-			$order_query = 'ORDER BY '.$order_column[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' ';
+			$order_query = ' ORDER BY '.$order_column[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' ';
 		}
 		else
 		{
-			$order_query = 'ORDER BY product_id DESC ';
+			$order_query = ' ORDER BY product_id DESC ';
 		}
 
 		$limit_query = '';
@@ -139,7 +140,7 @@ if(isset($_POST["action"])){
 			$status = '';
 			if($row["product_status"] == 'Enable')
 			{
-				$status = '<button type="button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="'.$row["product_id"].'" data-status="'.$row["product_status"].'">Enable</button>';
+				$status = '<button type="button" name="status_button" class="btn btn-black btn-sm status_button" data-id="'.$row["product_id"].'" data-status="'.$row["product_status"].'">Enable</button>';
 			}
 			else
 			{
@@ -157,9 +158,9 @@ if(isset($_POST["action"])){
 		}
 
 		$output = array(
-			"recordsTotal"  	=>  $total_rows,
+			"recordsTotal"  		=>  $total_rows,
 			"recordsFiltered" 	=> 	$filtered_rows,
-			"data"    			=> 	$data
+			"data"    					=> 	$data
 		);
 			
 		echo json_encode($output);

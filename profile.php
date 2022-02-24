@@ -30,11 +30,11 @@ include('header.php');
                             <div class="card-header py-3">
                                 <div class="row">
                                     <div class="col">
-                                        <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
+                                        <h6 class="m-0 font-weight-bold text-black">Profile</h6>
                                     </div>
                                     <div clas="col" align="right">
                                         <input type="hidden" name="action" value="profile" />
-                                        <button type="submit" name="edit_button" id="edit_button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
+                                        <button type="submit" name="edit_button" id="edit_button" class="btn btn-black btn-sm"><i class="fas fa-edit"></i> Edit</button>
                                         &nbsp;&nbsp;
                                     </div>
                                 </div>

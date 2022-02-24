@@ -27,10 +27,10 @@ include('header.php');
                         <div class="card-header py-3">
                         	<div class="row">
                             	<div class="col">
-                            		<h6 class="m-0 font-weight-bold text-primary">Tax List</h6>
+                            		<h6 class="m-0 font-weight-bold text-black">Tax List</h6>
                             	</div>
                             	<div class="col" align="right">
-                            		<button type="button" name="add_tax" id="add_tax" class="btn btn-success btn-circle btn-sm"><i class="fas fa-plus"></i></button>
+                            		<button type="button" name="add_tax" id="add_tax" class="btn btn-black btn-circle btn-sm"><i class="fas fa-plus"></i></button>
                             	</div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@ include('header.php');
         		<div class="modal-footer">
           			<input type="hidden" name="hidden_id" id="hidden_id" />
           			<input type="hidden" name="action" id="action" value="Add" />
-          			<input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Add" />
+          			<input type="submit" name="submit" id="submit_button" class="btn btn-black" value="Add" />
           			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         		</div>
       		</div>

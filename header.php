@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+$protocol = strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), 'https') === FALSE ? 'http' : 'https';
+$host = $_SERVER["HTTP_HOST"];
+$url = "$protocol://$host";
+function pageTitle( $title = "") {
+    echo $title;
+}
+?>
 
 <head>
 
@@ -12,18 +20,20 @@
     <title>Pospoint</title>
 
     <!-- Custom fonts for this template-->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= $url ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?= $url ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/vendor/parsley/parsley.css"/>
+    <link rel="stylesheet" type="text/css" href="<?= $url ?>/vendor/parsley/parsley.css" />
 
-    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap-select/bootstrap-select.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?= $url ?>/vendor/bootstrap-select/bootstrap-select.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?= $url ?>/posapp/reyu.css" />
 
 </head>
 
@@ -33,17 +43,17 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-black sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    
+
                 </div>
-                 
+
                 <i class="fas fa-laugh-wink"></i>
                 <div class="sidebar-brand-text mx-3">Admin</div>
-                 
+
             </a>
 
             <!-- Divider -->
@@ -51,61 +61,58 @@
 
             <!-- Nav Item - Dashboard -->
             <?php
-            if($object->is_master_user())
-            {
+            if ($object->is_master_user()) {
             ?>
-            <li class="nav-item">
-                <a class="nav-link" href="category.php">
-                    <i class="fas fa-th-list"></i>
-                    <span>Category</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="table.php">
-                    <i class="fas fa-couch"></i>
-                    <span>Table</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tax.php">
-                    <i class="fas fa-percent"></i>
-                    <span>Tax</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="product.php">
-                    <i class="fas fa-utensils"></i>
-                    <span>Product</span></a>
-            </li>
-              <li class="nav-item">
-                <a class="nav-link" href="posapp/">
-                    <i class="far fa-edit"></i>
-                    <span>POS</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="user.php">
-                    <i class="fas fa-users-cog"></i>
-                    <span>User</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="category.php">
+                        <i class="fas fa-th-list"></i>
+                        <span>Category</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="table.php">
+                        <i class="fas fa-couch"></i>
+                        <span>Table</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="tax.php">
+                        <i class="fas fa-percent"></i>
+                        <span>Tax</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product.php">
+                        <i class="fas fa-utensils"></i>
+                        <span>Product</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="posapp/">
+                        <i class="far fa-edit"></i>
+                        <span>POS</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="user.php">
+                        <i class="fas fa-users-cog"></i>
+                        <span>User</span></a>
+                </li>
             <?php
             }
-            if($object->is_waiter_user() || $object->is_master_user())
-            {
+            if ($object->is_waiter_user() || $object->is_master_user()) {
             ?>
-            <li class="nav-item">
-                <a class="nav-link" href="order.php">
-                    <i class="far fa-edit"></i>
-                    <span>Order</span></a>
-            </li>
-         
+                <li class="nav-item">
+                    <a class="nav-link" href="order.php">
+                        <i class="far fa-edit"></i>
+                        <span>Order</span></a>
+                </li>
+
             <?php
             }
-            if($object->is_cashier_user() || $object->is_master_user())
-            {
+            if ($object->is_cashier_user() || $object->is_master_user()) {
             ?>
-            <li class="nav-item">
-                <a class="nav-link" href="billing.php">
-                    <i class="fas fa-file-invoice"></i>
-                    <span>Billing</span></a>
-            </li>
-         
+                <li class="nav-item">
+                    <a class="nav-link" href="billing.php">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Billing</span></a>
+                </li>
+
             <?php
             }
             ?>
@@ -124,45 +131,34 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-black topbar mb-4 static-top shadow text-light">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
+                        <?php pageTitle(); ?>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <?php
-                        $object->query = "
-                        SELECT * FROM user_table 
-                        WHERE user_id = '".$_SESSION['user_id']."'
-                        ";
+                        $object->query = " SELECT * FROM user_table WHERE user_id = '" . $_SESSION['user_id'] . "'";
 
                         $user_result = $object->get_result();
 
                         $user_name = '';
                         $user_profile_image = '';
-                        foreach($user_result as $row)
-                        {
-                            if($row['user_name'] != '')
-                            {
+                        foreach ($user_result as $row) {
+                            if ($row['user_name'] != '') {
                                 $user_name = $row['user_name'];
-                            }
-                            else
-                            {
+                            } else {
                                 $user_name = 'Master';
                             }
 
-                            if($row['user_profile'] != '')
-                            {
+                            if ($row['user_profile'] != '') {
                                 $user_profile_image = $row['user_profile'];
-                            }
-                            else
-                            {
+                            } else {
                                 $user_profile_image = 'img/undraw_profile.svg';
                             }
                         }
@@ -170,27 +166,23 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user_profile_name"><?php echo $user_name; ?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="<?php echo $user_profile_image; ?>" id="user_profile_image">
+                                <img class="img-profile rounded-circle" src="<?php echo $user_profile_image; ?>" id="user_profile_image">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="profile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
                                 <?php
-                                if($object->is_master_user())
-                                {
+                                if ($object->is_master_user()) {
                                 ?>
-                                <a class="dropdown-item" href="setting.php">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
+                                    <a class="dropdown-item" href="setting.php">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
                                 <?php
                                 }
                                 ?>

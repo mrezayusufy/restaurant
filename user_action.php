@@ -82,7 +82,7 @@ if(isset($_POST["action"]))
 			if($row["user_status"] == 'Enable')
 			{
 				$delete_button = '<button type="button" name="delete_button" class="btn btn-danger btn-circle btn-sm delete_button" data-id="'.$row["user_id"].'" data-status="'.$row["user_status"].'"><i class="fas fa-times"></i></button>';
-				$status = '<button type="button" name="status_button" class="btn btn-primary btn-sm">Enable</button>';
+				$status = '<button type="button" name="status_button" class="btn btn-black btn-sm">Enable</button>';
 			}
 			else
 			{

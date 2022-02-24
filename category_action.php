@@ -120,7 +120,7 @@ if(isset($_POST["action"]))
 			$status = '';
 			if($row["category_status"] == 'Enable')
 			{
-				$status = '<button type="button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="'.$row["category_id"].'" data-status="'.$row["category_status"].'">Enable</button>';
+				$status = '<button type="button" name="status_button" class="btn btn-black btn-sm status_button" data-id="'.$row["category_id"].'" data-status="'.$row["category_status"].'">Enable</button>';
 			}
 			else
 			{
