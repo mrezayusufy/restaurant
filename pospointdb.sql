@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Feb 22, 2022 at 07:44 AM
--- Server version: 10.5.13-MariaDB-cll-lve
--- PHP Version: 7.2.34
+-- Host: 127.0.0.1
+-- Generation Time: Feb 24, 2022 at 05:48 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u559678163_pospointdb`
+-- Database: `pospointdb`
 --
 
 -- --------------------------------------------------------
@@ -37,7 +37,7 @@ CREATE TABLE `camp` (
   `stime` varchar(250) NOT NULL,
   `etime` varchar(250) NOT NULL,
   `period` int(11) NOT NULL,
-  `date_reg` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date_reg` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `client` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -53,7 +53,7 @@ CREATE TABLE `client` (
   `phone` varchar(100) NOT NULL,
   `email` varchar(250) NOT NULL,
   `location` varchar(250) NOT NULL,
-  `date_reg` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date_reg` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `contact` (
   `Sales_Rep` int(10) UNSIGNED NOT NULL,
   `Rating` decimal(4,2) NOT NULL,
   `Project_Type` varchar(35) DEFAULT NULL,
-  `Project_Description` tinytext DEFAULT NULL,
+  `Project_Description` tinytext,
   `Proposal_Due_Date` date DEFAULT NULL,
   `Budget` decimal(10,2) DEFAULT NULL,
   `Deliverables` varchar(30) DEFAULT NULL
@@ -130,7 +130,7 @@ CREATE TABLE `crm_user` (
   `location` varchar(250) DEFAULT NULL,
   `phone` varchar(15) NOT NULL,
   `paymentNo` varchar(250) DEFAULT NULL,
-  `date_reg` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date_reg` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -166,8 +166,8 @@ CREATE TABLE `lead` (
   `date_modified` datetime DEFAULT NULL,
   `modified_user_id` char(36) DEFAULT NULL,
   `created_by` char(36) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `deleted` tinyint(1) DEFAULT 0,
+  `description` text,
+  `deleted` tinyint(1) DEFAULT '0',
   `assigned_user_id` char(36) DEFAULT NULL,
   `salutation` varchar(255) DEFAULT NULL,
   `first_name` varchar(100) DEFAULT NULL,
@@ -175,13 +175,13 @@ CREATE TABLE `lead` (
   `title` varchar(100) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `department` varchar(100) DEFAULT NULL,
-  `do_not_call` tinyint(1) DEFAULT 0,
+  `do_not_call` tinyint(1) DEFAULT '0',
   `phone_home` varchar(100) DEFAULT NULL,
   `phone_mobile` varchar(100) DEFAULT NULL,
   `phone_work` varchar(100) DEFAULT NULL,
   `phone_other` varchar(100) DEFAULT NULL,
   `phone_fax` varchar(100) DEFAULT NULL,
-  `lawful_basis` text DEFAULT NULL,
+  `lawful_basis` text,
   `date_reviewed` date DEFAULT NULL,
   `lawful_basis_source` varchar(100) DEFAULT NULL,
   `primary_address_street` varchar(150) DEFAULT NULL,
@@ -196,15 +196,15 @@ CREATE TABLE `lead` (
   `alt_address_country` varchar(255) DEFAULT NULL,
   `assistant` varchar(75) DEFAULT NULL,
   `assistant_phone` varchar(100) DEFAULT NULL,
-  `converted` tinyint(1) DEFAULT 0,
+  `converted` tinyint(1) DEFAULT '0',
   `refered_by` varchar(100) DEFAULT NULL,
   `lead_source` varchar(100) DEFAULT NULL,
-  `lead_source_description` text DEFAULT NULL,
+  `lead_source_description` text,
   `status` varchar(100) DEFAULT NULL,
-  `status_description` text DEFAULT NULL,
+  `status_description` text,
   `reports_to_id` char(36) DEFAULT NULL,
   `account_name` varchar(255) DEFAULT NULL,
-  `account_description` text DEFAULT NULL,
+  `account_description` text,
   `contact_id` char(36) DEFAULT NULL,
   `account_id` char(36) DEFAULT NULL,
   `opportunity_id` char(36) DEFAULT NULL,
@@ -315,8 +315,8 @@ CREATE TABLE `leads` (
   `date_modified` datetime DEFAULT NULL,
   `modified_user_id` char(36) DEFAULT NULL,
   `created_by` char(36) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `deleted` tinyint(1) DEFAULT 0,
+  `description` text,
+  `deleted` tinyint(1) DEFAULT '0',
   `assigned_user_id` char(36) DEFAULT NULL,
   `salutation` varchar(255) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
@@ -325,13 +325,13 @@ CREATE TABLE `leads` (
   `email` varchar(100) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `department` varchar(100) DEFAULT NULL,
-  `do_not_call` tinyint(1) DEFAULT 0,
+  `do_not_call` tinyint(1) DEFAULT '0',
   `phone_home` varchar(100) DEFAULT NULL,
   `phone_mobile` varchar(100) DEFAULT NULL,
   `business_phone` varchar(100) DEFAULT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `phone_fax` varchar(100) DEFAULT NULL,
-  `lawful_basis` text DEFAULT NULL,
+  `lawful_basis` text,
   `date_reviewed` date DEFAULT NULL,
   `lawful_basis_source` varchar(100) DEFAULT NULL,
   `primary_address_street` varchar(150) DEFAULT NULL,
@@ -346,15 +346,15 @@ CREATE TABLE `leads` (
   `business_industry` varchar(255) DEFAULT NULL,
   `assistant` varchar(75) DEFAULT NULL,
   `assistant_phone` varchar(100) DEFAULT NULL,
-  `converted` tinyint(1) DEFAULT 0,
+  `converted` tinyint(1) DEFAULT '0',
   `refered_by` varchar(100) DEFAULT NULL,
   `lead_source` varchar(100) DEFAULT NULL,
-  `lead_score` text DEFAULT NULL,
+  `lead_score` text,
   `lead_status` varchar(100) DEFAULT NULL,
-  `status_description` text DEFAULT NULL,
+  `status_description` text,
   `reports_to_id` char(36) DEFAULT NULL,
   `account_name` varchar(255) DEFAULT NULL,
-  `account_description` text DEFAULT NULL,
+  `account_description` text,
   `contact_id` char(36) DEFAULT NULL,
   `account_id` char(36) DEFAULT NULL,
   `opportunity_id` char(36) DEFAULT NULL,
@@ -438,7 +438,7 @@ CREATE TABLE `people` (
   `phone` varchar(100) NOT NULL,
   `email` varchar(250) NOT NULL,
   `location` varchar(250) NOT NULL,
-  `date_reg` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date_reg` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -531,6 +531,7 @@ INSERT INTO `products` (`id`, `main_menu`, `menu1`, `menu1_price`, `menu2`, `men
 CREATE TABLE `product_category_table` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `category_icon` varchar(110) COLLATE utf8_unicode_ci DEFAULT NULL,
   `category_status` enum('Enable','Disable') COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -538,12 +539,12 @@ CREATE TABLE `product_category_table` (
 -- Dumping data for table `product_category_table`
 --
 
-INSERT INTO `product_category_table` (`category_id`, `category_name`, `category_status`) VALUES
-(1, 'Snacks', 'Enable'),
-(2, 'drinks', 'Enable'),
-(3, 'Breakfast', 'Enable'),
-(4, 'Dinner', 'Enable'),
-(5, 'Lunch', 'Enable');
+INSERT INTO `product_category_table` (`category_id`, `category_name`, `category_icon`, `category_status`) VALUES
+(1, 'Snacks', NULL, 'Enable'),
+(2, 'drinks', NULL, 'Disable'),
+(3, 'Breakfast', NULL, 'Disable'),
+(4, 'Dinner', NULL, 'Disable'),
+(5, 'Lunch', NULL, 'Disable');
 
 -- --------------------------------------------------------
 
@@ -564,9 +565,9 @@ CREATE TABLE `product_table` (
 --
 
 INSERT INTO `product_table` (`product_id`, `category_name`, `product_name`, `product_price`, `product_status`) VALUES
-(4, 'Breakfast', 'Eggs', '5.00', 'Enable'),
-(5, 'Breakfast', 'Omlet', '10.00', 'Enable'),
-(6, 'Dinner', 'Chicken wings', '20.00', 'Enable');
+(4, 'breakfast', 'Eggs', '5.00', 'Enable'),
+(5, 'breakfast', 'Omlet', '10.00', 'Enable'),
+(6, 'dinner', 'Chicken wings', '20.00', 'Enable');
 
 -- --------------------------------------------------------
 
@@ -592,6 +593,31 @@ CREATE TABLE `restaurant_table` (
 
 INSERT INTO `restaurant_table` (`restaurant_id`, `restaurant_name`, `restaurant_tag_line`, `restaurant_address`, `restaurant_contact_no`, `restaurant_email`, `restaurant_currency`, `restaurant_timezone`, `restaurant_logo`) VALUES
 (1, 'KFT', 'Fast Food', 'Toronto, Canada', '1234567890', 'admin@pospoint.be', 'EUR', 'Europe/Brussels', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_data`
+--
+
+CREATE TABLE `table_data` (
+  `table_id` int(11) UNSIGNED NOT NULL,
+  `table_name` varchar(255) DEFAULT NULL,
+  `table_capacity` varchar(255) DEFAULT NULL,
+  `table_status` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `table_data`
+--
+
+INSERT INTO `table_data` (`table_id`, `table_name`, `table_capacity`, `table_status`) VALUES
+(1, 'table 1', '3', 'Enabled'),
+(2, 'table 2', '3', 'Enabled'),
+(3, 'table 3', '2', 'Enable'),
+(4, 'table 4', '2', 'Enable'),
+(5, 'table 5', '4', 'Enable'),
+(6, 'table 6', '8', 'enabled');
 
 -- --------------------------------------------------------
 
@@ -767,6 +793,12 @@ ALTER TABLE `restaurant_table`
   ADD PRIMARY KEY (`restaurant_id`);
 
 --
+-- Indexes for table `table_data`
+--
+ALTER TABLE `table_data`
+  ADD PRIMARY KEY (`table_id`);
+
+--
 -- Indexes for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
@@ -846,7 +878,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_category_table`
 --
 ALTER TABLE `product_category_table`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_table`
@@ -859,6 +891,12 @@ ALTER TABLE `product_table`
 --
 ALTER TABLE `restaurant_table`
   MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `table_data`
+--
+ALTER TABLE `table_data`
+  MODIFY `table_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`

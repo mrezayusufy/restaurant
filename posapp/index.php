@@ -17,7 +17,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
 </head>
 
 <body>
-  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables();" class="d-flex bg-black text-light">
+  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables(); setCategory();" class="d-flex bg-black text-light">
     <!-- left side -->
     <section class="d-flex flex-column col-2 align-items-center h-100vh w-75">
       <div class="mt-3 text-center">
@@ -39,7 +39,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
         <div class="d-flex flex-column gap align-items-center mt-3">
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Page</span>
+              <span class="input-group-text" id="category_page">Page</span>
             </div>
             <input list="category-pages"
               onfocus="this.value=''" 
@@ -47,6 +47,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
               id="category-page" 
               name="category-page" 
               aria-label="Select catgeory page" 
+              aria-describedby="category_page"
               class="form-control"/>
             <datalist id="category-pages">
                 <option value="1">
@@ -56,7 +57,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
                 <option value="5">
             </datalist>
           </div>
-          <div>
+          <div class="d-flex flex-row gap">
             <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-down"></i></button>
             <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-up"></i></button>
           </div>
@@ -95,7 +96,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
           </nav>
         </section>
         <!-- category name -->
-        <h2 class="text-center text-black">Dinner</h2>
+        <h2 class="text-center text-black text-capitalize">{{category}}</h2>
         <!-- products -->
         <section class="align-items-baseline d-flex flex-row p-3 gap">
           <div class="col-3 p-0" ng-repeat="p in products">
@@ -195,14 +196,24 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       $scope.categories = [];
       $scope.tables = [];
       $scope.url = "<?= $url; ?>";
+      // category page number
+      $scope.categoryPage = null;
+      $scope.setCateoryPage = function(page) {
+        
+      }
+      // set category to fetch product by category
       $scope.category = null;
       $scope.setCategory = function(category) {
-        $scope.category = category;
-        $scope.fetchProducts();
+        if(category) {
+          $scope.category = category;
+          $scope.fetchProducts(category);
+        } else {
+          $scope.category = "Menus"
+        }
       }
-      $scope.fetchProducts = function() {
-        var category = $scope.category ? '' : "&" + $scope.category;
-        $http.get($scope.url+"/product_action.php?action=products" + category)
+      $scope.fetchProducts = function(category) {
+        var c = category ? "&category=" + category : '';
+        $http.get($scope.url + "/product_action.php?action=products" + c)
         .then( function(data) { 
           $scope.products = data.data.data;
           })
