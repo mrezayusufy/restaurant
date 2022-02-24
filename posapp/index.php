@@ -20,11 +20,19 @@ $url = "http://". $_SERVER["HTTP_HOST"];
   <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables();" class="d-flex bg-black text-light">
     <!-- left side -->
     <section class="d-flex flex-column col-2 align-items-center h-100vh w-75">
+      <div class="mt-3 text-center">
+        <div class="h3">{{ date | date: 'hh:mm a'}}</div>
+        <div>{{ date  | date: 'dd MMM yyyy' }}</div>
+      </div>
       <!-- logo -->
-      <h2 class="p-3"><i class="fa fas fa-utensils"></i></h2>
+      <h2 class="p-3 m-0"><i class="fa fas fa-utensils"></i></h2>
       <!-- categories -->
       <div class="d-flex flex-column justify-content-center align-content-center align-items-center gap w-100">
         <div class="p-1 btn btn-outline-light w-100 rounded-pill" ng-repeat="c in categories">{{c.category_name}}</div>
+        <div class="d-flex flex-row gap">
+          <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-down"></i></button>
+          <button class="btn btn-outline-light rounded-pill"><i class="fas fa-arrow-up"></i></button>
+        </div>
       </div>
       <!-- admin and logout btn  -->
       <div class="d-flex row justify-content-between mt-auto mb-3">
@@ -119,18 +127,30 @@ $url = "http://". $_SERVER["HTTP_HOST"];
           <button class="btn btn-outline-secondary rounded-pill">Cancel</button>
         </div>
       </div>
-      <div class="d-flex flex-row p-1 gap">
-        <div class="btn btn-outline-light">Different Pay</div>
-        <div class="btn btn-outline-light px-3">€</div>
+      <div class="d-flex flex-row p-3 gap">
+        <div class="btn btn-outline-light grow-3 rounded-pill">Different Pay</div>
+        <div class="btn btn-outline-light px-3 rounded-pill">€</div>
       </div>
-      <div class="grid">
-
+      <div class="grid column g-columns g-rows gap mx-4 align-items-center justify-content-center" style="--c: 40px 40px 40px 40px; --g: 15px;">
+        <div class="btn btn-outline-light rounded-pill">0</div>
+        <div class="btn btn-outline-light rounded-pill">c</div>
+        <div class="btn btn-outline-light rounded-pill">,</div>
+        <div class="btn btn-outline-light rounded-pill">1</div>
+        <div class="btn btn-outline-light rounded-pill">2</div>
+        <div class="btn btn-outline-light rounded-pill">3</div>
+        <div class="btn btn-outline-light rounded-pill">4</div>
+        <div class="btn btn-outline-light rounded-pill">5</div>
+        <div class="btn btn-outline-light rounded-pill">6</div>
+        <div class="btn btn-outline-light rounded-pill">7</div>
+        <div class="btn btn-outline-light rounded-pill">8</div>
+        <div class="btn btn-outline-light rounded-pill">9</div>
       </div>
     </section> <!-- end cart -->
   </main>
   <script>
     var app = angular.module('app', []);
     app.controller('controller', function($scope, $http) {
+      $scope.date = new Date();
       $scope.products = [];
       $scope.categories = [];
       $scope.tables = [];

@@ -1,5 +1,6 @@
 .gap {
-  gap: 10px;
+  --g: 10px;
+  gap: var(--g);
 }
 .h-100vh {
   height: 100vh;
@@ -25,9 +26,16 @@
 .column {
   grid-auto-flow: column;
 }
+.grow-3 {
+  flex-grow: 3;
+}
 .g-columns {
   --c: 3fr 1fr 1fr;
   grid-template-columns: var(--c);
+}
+.g-rows {
+  --r: 40px 40px 40px;
+  grid-template-rows: var(--r);
 }
 .bg-black {
   background-color: black;
