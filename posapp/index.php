@@ -44,8 +44,8 @@ $url = "http://". $_SERVER["HTTP_HOST"];
             <input list="category-pages"
               ng-model="page"
               onfocus="this.value=''" 
-              onchange="this.blur();"
-              ng-change="setPage(page);" 
+              onchange="this.blur()"
+              ng-change="setPage(page);"
               id="category-page" 
               name="category-page" 
               aria-describedby="category_page"
@@ -59,8 +59,8 @@ $url = "http://". $_SERVER["HTTP_HOST"];
             </datalist>
           </div>
           <div class="d-flex flex-row gap">
-            <button class="btn btn-outline-light rounded-pill" ng-click="pageDown()"><i class="fas fa-arrow-down"></i></button>
-            <button class="btn btn-outline-light rounded-pill" ng-click="pageUp()"><i class="fas fa-arrow-up"></i></button>
+            <button class="btn btn-outline-light rounded-pill" ng-disabled="page <= 1" ng-click="pageDown()" ><i class="fas fa-arrow-down"></i></button>
+            <button class="btn btn-outline-light rounded-pill" ng-disabled="page == total_category_page" ng-click="pageUp()"><i class="fas fa-arrow-up"></i></button>
           </div>
         </div>
       </div>
@@ -203,8 +203,8 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       $scope.fetchProducts = function(category) {
         var c = category ? "&category=" + category : '';
         $http.get($scope.url + "/product_action.php?action=products" + c)
-        .then( function(data) { 
-          $scope.products = data.data.data;
+        .then(function(data) { 
+            $scope.products = data.data.data;
           });
       }
       // fetch category by pagination 
