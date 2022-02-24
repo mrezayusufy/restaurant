@@ -41,7 +41,7 @@ $url = "http://". $_SERVER["HTTP_HOST"];
       </div>
     </section>
     <!-- middle section -->
-    <section class="col-7 p-0 bg-white">
+    <section class="col-7 p-0 bg-white d-flex flex-column">
       <!-- tables -->
       <div class="align-items-baseline d-flex flex-row p-3 gap bg-black">
         <div ng-repeat="t in tables">
@@ -83,6 +83,15 @@ $url = "http://". $_SERVER["HTTP_HOST"];
             </div>
           </div>
         </div>
+      </section>
+      <!-- buttons  -->
+      <section class="align-items-baseline d-flex flex-row p-3 gap bg-black mt-auto justify-content-center">
+        <button class="btn btn-outline-light rounded-pill">Cash Drawer</button>
+        <button class="btn btn-outline-light rounded-pill">Customers</button>
+        <button class="btn btn-outline-light rounded-pill">Subtotal</button>
+        <button class="btn btn-outline-light rounded-pill">Take out</button>
+        <button class="btn btn-outline-light rounded-pill">PLU</button>
+        <button class="btn btn-outline-light rounded-pill">More</button>
       </section>
     </section>
     <section class="col-3 w-100 h-auto pt-3 p-0">
