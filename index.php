@@ -11,7 +11,9 @@ if (!$object->Is_set_up_done()) {
 if ($object->is_login()) {
     header("location:" . $object->base_url . "dashboard.php");
 }
-
+$protocol = strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), 'https') === FALSE ? 'http' : 'https';
+$host = $_SERVER["HTTP_HOST"];
+$url = "$protocol://$host";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,16 +29,17 @@ if ($object->is_login()) {
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="vendor/parsley/parsley.css" />
+    <link href="<?= $url ?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?= $url ?>/vendor/parsley/parsley.css" />
+    <link rel="stylesheet" type="text/css" href="<?= $url ?>/posapp/reyu.css" />
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-light">
 
-    <div class="container">
+    <div class="container h-100vh">
 
         <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="align-items-center h-100 justify-content-center row">
 
             <div class="col-xl-5 col-lg-5 col-md-6">
 

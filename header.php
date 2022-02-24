@@ -4,9 +4,7 @@
 $protocol = strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), 'https') === FALSE ? 'http' : 'https';
 $host = $_SERVER["HTTP_HOST"];
 $url = "$protocol://$host";
-function pageTitle( $title = "") {
-    echo $title;
-}
+
 ?>
 
 <head>
@@ -139,7 +137,6 @@ function pageTitle( $title = "") {
                     </button>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <?php pageTitle(); ?>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <?php
