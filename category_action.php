@@ -15,7 +15,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "all") {
 	$result = $object->get_result();
 	foreach ($result as $row) {
 		$sid = $row["subcategory"];
-		$object->query = "SELECT * from product_category_table WHERE category_id = $sid ";
+		$object->query = "SELECT * FROM product_category_table WHERE category_id = $sid ";
 		$subcategory_result = $object->get_result();
 		$subcategory_data = [];
 		foreach ($subcategory_result as $s) {

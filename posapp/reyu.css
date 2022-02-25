@@ -72,12 +72,11 @@
   background-color: #000000 !important;
   border-color: #000000 !important;
 }
+
 .print {
   display: none;
 }
-.screen {
-  display: inline;
-}
+
 @media print {
   h1,
   h2,

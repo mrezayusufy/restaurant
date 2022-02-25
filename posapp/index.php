@@ -19,21 +19,21 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
 <body>
   <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables(); setCategory(); setPage(); fetchCart(); page = 1" class="d-flex bg-black text-light">
     <!-- left side -->
-    <section class="d-flex flex-column col-2 align-items-center h-100vh w-75 screen">
+    <section class="grid column g-columns g-rows col-2 align-items-center h-100vh w-75 screen" style="--c: 1fr; --r: 100px calc(100vh - 150px) 50px;">
       <div class="mt-3 text-center">
         <div class="h3 m-0">{{ date | date: 'hh:mm a' }}</div>
-        <div>{{ date | date: 'dd MMM yyyy' }}</div>
+        <div class="fs-s ">{{ date | date: 'dd MMM yyyy' }}</div>
+        <!-- logo -->
+        <h4 class="p-2 m-0"><i class="fa fas fa-utensils"></i></h4>
       </div>
-      <!-- logo -->
-      <h2 class="p-3 m-0"><i class="fa fas fa-utensils"></i></h2>
       <!-- categories -->
-      <div class="d-flex flex-column justify-content-center align-content-center align-items-center gap w-100">
-        <div class="d-flex flex-column justify-content-center gap w-100">
+      <div class="d-flex flex-column justify-content-center gap align-content-center gap w-100 overflow-auto">
+        <div style="height: calc(100vh - 150px);" class="d-flex flex-column gap">
           <button class="p-1 btn btn-outline-light w-100 rounded-pill" ng-repeat="c in categories" ng-class="{'btn-light text-black' : c.category_name === category}" ng-click="setCategory(c.category_name)">
             {{c.category_name}}
           </button>
         </div>
-        <div class="d-flex flex-column gap align-items-center mt-3">
+        <div class="d-none flex-column gap align-items-center mt-3">
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text" id="category_page">Page</span>
@@ -50,21 +50,21 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
         </div>
       </div>
       <!-- admin and logout btn  -->
-      <div class="d-flex row justify-content-between mt-auto mb-3">
-        <a class="btn text-light rounded-pill h5" href="<?= $url ?>/"><i class="fas fa-user"></i> Admin</a>
-        <button class="btn text-light rounded-pill h5" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-power-off"></i> Logout</butt>
+      <div class="d-flex row justify-content-between mt-auto mb-2">
+        <a class="btn text-light rounded-pill h5 m-0" href="<?= $url ?>/"><i class="fas fa-user"></i> Admin</a>
+        <button class="btn text-light rounded-pill h5 m-0" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-power-off"></i> Logout</butt>
       </div>
     </section>
     <!-- middle section -->
-    <section class="col-7 p-0 bg-black d-flex flex-column screen">
+    <section class="col-7 p-0 bg-black grid column screen g-columns g-rows" style="--c: 1fr;--r: 100px calc(100vh - 150px) 50px;">
       <!-- tables -->
-      <div class="just d-flex flex-row p-3 gap">
-        <div class="d-flex-flex-row p-3 gap align-items-baseline">
+      <div class="just d-flex flex-column p-3 gap">
+        <div class="row gap align-items-baseline">
           <div ng-repeat="t in tables">
             <div ng-class="{'bg-gradient-dark' : t.status === 'Enable'}" class="card text-dark text-center shadow-md">
-              <div class="card-body p-3" ng-class="{'text-light' : t.status === 'Enable'}">
+              <div class="card-body p-2" ng-class="{'text-light' : t.status === 'Enable'}">
                 <div class="card-title">
-                  <h4>{{t.name}}</h4>
+                  <h5>{{t.name}}</h5>
                 </div>
                 <div> {{t.capacity}} </div>
               </div>
@@ -72,7 +72,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
           </div>
         </div>
         <!-- pagination -->
-        <section class="d-flex justify-content-center my-2">
+        <section class="justify-content-center d-none">
           <nav aria-label="Page navigation mt-3">
             <ul class="pagination m-0">
               <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -84,11 +84,11 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
           </nav>
         </section>
       </div>
-      <section class="d-flex flex-column bg-white h-100 rounded">
+      <section class="d-flex flex-column bg-white h-auto rounded">
         <!-- category name -->
         <h2 class="text-center text-black text-capitalize m-0">{{category}}</h2>
         <!-- products -->
-        <section class="align-items-baseline d-flex flex-row px-3 py-3 gap flex-wrap overflow-auto h" style="--h: calc(100vh - 300px) !important;">
+        <section class="align-items-baseline d-flex flex-row px-3 py-3 gap flex-wrap overflow-auto h-auto">
           <div class="col-3 p-0" ng-repeat="p in products">
             <div class="card text-white text-center bg-gradient-dark shadow-md ">
               <div class="card-body px-2 py-3">
@@ -106,7 +106,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
         </section>
       </section>
       <!-- buttons  -->
-      <section class="align-items-baseline d-flex flex-row p-3 gap mt-auto justify-content-center">
+      <section class="align-items-baseline d-flex flex-row my-2 gap mt-auto justify-content-center">
         <button class="btn btn-outline-light rounded-pill">Cash Drawer</button>
         <button class="btn btn-outline-light rounded-pill">Customers</button>
         <button class="btn btn-outline-light rounded-pill">Subtotal</button>
@@ -289,7 +289,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
       $scope.fetchCategories = function(page) {
         $http
           .get(
-            `${$scope.url}/category_action.php?action=categories&page=${page}&skip=${$scope.skip}`
+            `${$scope.url}/category_action.php?action=categories`
           )
           .then(function(data) {
             $scope.categories = data.data.data;
