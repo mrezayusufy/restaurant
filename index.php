@@ -100,9 +100,7 @@ $url = "$protocol://$host";
 
 <script>
     $(document).ready(function() {
-
         $('#login_form').parsley();
-
         $('#login_form').on('submit', function(event) {
             event.preventDefault();
             if ($('#login_form').parsley().isValid()) {
