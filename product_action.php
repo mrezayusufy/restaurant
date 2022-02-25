@@ -251,12 +251,10 @@ if(isset($_POST["action"])){
 			':product_id'		=>	$_POST['hidden_id']
 		);
 
-		$object->query = "
-		SELECT * FROM product_table 
-		WHERE category_name = :category_name 
-		AND product_name = :product_name
-		AND product_id != :product_id
-		";
+		$object->query = "SELECT * FROM product_table 
+											WHERE category_name = :category_name 
+											AND product_name = :product_name
+											AND product_id != :product_id ";
 
 		$object->execute($data);
 

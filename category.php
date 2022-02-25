@@ -37,13 +37,12 @@ include('header.php');
 				<thead>
 					<tr>
 						<th>Category Name</th>
+						<th>Subcategory</th>
 						<th>Status</th>
 						<th>Action</th>
 					</tr>
 				</thead>
-				<tbody>
-
-				</tbody>
+				<tbody></tbody>
 			</table>
 		</div>
 	</div>
@@ -67,7 +66,13 @@ include('footer.php');
 						<label>Category Name</label>
 						<input type="text" name="category_name" id="category_name" class="form-control" required data-parsley-pattern="/^[a-zA-Z0-9 \s]+$/" data-parsley-trigger="keyup" />
 					</div>
+					<div class="form-group">
+						<label for="subcategory_name">subcategory</label>
+						<input list="categorylist" type="text" id="subcategory_name" name="subcategory_name" onfocus="this.value=''" onchange="this.blur()" class="form-control" keydown="pasteform-control" placeholder="subcategory Category or by default main" data-parsley-trigger="keyup" />
+						<datalist id="categorylist"></datalist>
+					</div>
 				</div>
+				<input type="hidden" id="subcategory" name="subcategory" value="0" />
 				<div class="modal-footer">
 					<input type="hidden" name="hidden_id" id="hidden_id" />
 					<input type="hidden" name="action" id="action" value="Add" />
@@ -98,27 +103,17 @@ include('footer.php');
 				"orderable": false,
 			}, ],
 		});
-
+		// add category
 		$('#add_category').click(function() {
-
 			$('#category_form')[0].reset();
-
 			$('#category_form').parsley().reset();
-
 			$('#modal_title').text('Add Data');
-
 			$('#action').val('Add');
-
 			$('#submit_button').val('Add');
-
 			$('#categoryModal').modal('show');
-
 			$('#form_message').html('');
-
 		});
-
 		$('#category_form').parsley();
-
 		$('#category_form').on('submit', function(event) {
 			event.preventDefault();
 			if ($('#category_form').parsley().isValid()) {
@@ -140,11 +135,8 @@ include('footer.php');
 							$('#categoryModal').modal('hide');
 							$('#message').html(data.success);
 							dataTable.ajax.reload();
-
 							setTimeout(function() {
-
 								$('#message').html('');
-
 							}, 5000);
 						}
 					}
@@ -152,45 +144,69 @@ include('footer.php');
 			}
 		});
 
-		$(document).on('click', '.edit_button', function() {
-
-			var category_id = $(this).data('id');
-
-			$('#category_form').parsley().reset();
-
-			$('#form_message').html('');
-
+		$("#add_category").click(function(e) {
+			e.preventDefault();
 			$.ajax({
-
+				type: "GET",
 				url: "category_action.php",
-
+				dataType: 'json',
+				data: {
+					action: "all"
+				},
+				success: function(result) {
+					var data = result;
+					data.forEach(item => {
+						$("#categorylist").append(`<option value="${item.name}" data-subcategoryid="${item.id}"></option>`)
+					});
+				}
+			})
+		})
+		$("#subcategory_name").on("input", function(e) {
+			e.preventDefault();
+			var v = $(this).val();
+			var val = $('#item').val()
+			var subcategoryid = $('#categorylist option').filter(function() {
+				return this.value === v;
+			}).attr('data-subcategoryid');
+			$("#subcategory").val(subcategoryid);
+		})
+		$(document).on('click', '.edit_button', function() {
+			$.ajax({
+				type: "GET",
+				url: "category_action.php",
+				dataType: 'json',
+				data: {
+					action: "all"
+				},
+				success: function(result) {
+					var data = result;
+					data.forEach(item => {
+						$("#categorylist").append(`<option value="${item.name}" data-subcategoryid="${item.id}"></option>`)
+					});
+				}
+			});
+			var category_id = $(this).data('id');
+			$('#category_form').parsley().reset();
+			$('#form_message').html('');
+			$.ajax({
+				url: "category_action.php",
 				method: "POST",
-
 				data: {
 					category_id: category_id,
 					action: 'fetch_single'
 				},
-
 				dataType: 'JSON',
-
 				success: function(data) {
-
 					$('#category_name').val(data.category_name);
-
+					$('#subcategory').val(data.subcategory);
+					$('#subcategory_name').val(data.subcategory_name);
 					$('#modal_title').text('Edit Data');
-
 					$('#action').val('Edit');
-
 					$('#submit_button').val('Edit');
-
 					$('#categoryModal').modal('show');
-
 					$('#hidden_id').val(category_id);
-
 				}
-
 			})
-
 		});
 
 		$(document).on('click', '.status_button', function() {
@@ -201,30 +217,20 @@ include('footer.php');
 				next_status = 'Disable';
 			}
 			if (confirm("Are you sure you want to " + next_status + " it?")) {
-
 				$.ajax({
-
 					url: "category_action.php",
-
 					method: "POST",
-
 					data: {
 						id: id,
 						action: 'change_status',
 						status: status,
 						next_status: next_status
 					},
-
 					success: function(data) {
-
 						$('#message').html(data);
-
 						dataTable.ajax.reload();
-
 						setTimeout(function() {
-
 							$('#message').html('');
-
 						}, 5000);
 
 					}

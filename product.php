@@ -14,8 +14,7 @@ if (!$object->is_master_user()) {
 	header("location:" . $object->base_url . "dashboard.php");
 }
 
-$object->query = "
-SELECT category_name FROM product_category_table 
+$object->query = "SELECT category_name FROM product_category_table 
 WHERE category_status = 'Enable' 
 ORDER BY category_name ASC
 ";

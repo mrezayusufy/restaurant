@@ -10,7 +10,7 @@
   height: 100vh;
 }
 .shadow-md {
-  box-shadow: 10px 10px 15px -15px #3a3b45;
+  box-shadow: 10px 10px 15px -15px #000;
 }
 .square {
   width: 110px;
@@ -71,4 +71,27 @@
   color: #fff;
   background-color: #000000 !important;
   border-color: #000000 !important;
+}
+.print {
+  display: none;
+}
+.screen {
+  display: inline;
+}
+@media print {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
+  .screen {
+    display: none !important;
+  }
+  .print {
+    display: block;
+  }
 }

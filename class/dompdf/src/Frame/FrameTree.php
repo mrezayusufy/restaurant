@@ -300,8 +300,8 @@ class FrameTree
         $frame_id = $new_node->getAttribute("frame_id");
         $frame = $this->get_frame($frame_id);
 
-        $parent_id = $node->getAttribute("frame_id");
-        $parent = $this->get_frame($parent_id);
+        $subcategory = $node->getAttribute("frame_id");
+        $parent = $this->get_frame($subcategory);
 
         if ($parent) {
             if ($pos === "before") {
