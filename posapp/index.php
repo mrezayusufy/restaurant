@@ -65,7 +65,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
       </div>
       <!-- admin and logout btn  -->
       <div class="d-flex row justify-content-between mt-auto mb-2">
-        <a class="btn text-light rounded-pill h5 m-0" href="<?= $url ?>/"><i class="fas fa-user"></i> Admin</a>
+        <a class="btn text-light rounded-pill h5 m-0" href="<?= $url ?>/"><i class="fas fa-home"></i> Home</a>
         <button class="btn text-light rounded-pill h5 m-0" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-power-off"></i> Logout</butt>
       </div>
     </section>
