@@ -73,7 +73,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
     <section class="col-7 p-0 bg-black grid column screen g-columns g-rows" style="--c: 1fr;--r: 110px calc(100vh - 150px) 50px;">
       <!-- tables -->
       <div class="just d-flex flex-column p-3 gap">
-        <div class="row gap align-items-baseline">
+        <div class="row gap align-items-baseline justify-content-center">
           <button ng-repeat="t in tables" ng-class="{'bg-light text-dark' : t.status === 'Enable'}" ng-click="setTable(t)" class="btn btn-secondary p-1 fs-s text-capitalize">
             <div>{{t.name}}</div>
             <div>{{t.capacity}}</div>
