@@ -74,16 +74,10 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
       <!-- tables -->
       <div class="just d-flex flex-column p-3 gap">
         <div class="row gap align-items-baseline">
-          <div ng-repeat="t in tables">
-            <div ng-class="{'bg-gradient-dark' : t.status === 'Enable'}" ng-click="setTable(t)" class="card border-0 text-dark text-center shadow-md">
-              <div class="card-body p-1" ng-class="{'text-light' : t.status === 'Enable'}">
-                <div class="card-title m-0 text-capitalize">
-                  <h6 class="m-0">{{t.name}}</h6>
-                </div>
-                <div class="fs-s"> {{t.capacity}} </div>
-              </div>
-            </div>
-          </div>
+          <button ng-repeat="t in tables" ng-class="{'bg-light text-dark' : t.status === 'Enable'}" ng-click="setTable(t)" class="btn btn-secondary p-1 fs-s text-capitalize">
+            <div>{{t.name}}</div>
+            <div>{{t.capacity}}</div>
+          </button>
         </div>
         <!-- pagination -->
         <section class="justify-content-center d-flex">
