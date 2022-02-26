@@ -128,7 +128,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
       <div class="zigzag text-black rounded d-flex flex-column py-3 mx-3 gap" style="--g:5px;">
         <!-- title -->
         <div class="px-3 border-bottom">
-          <h5 class="m-0">{{table.name}}</h5>
+          <h5 class="m-0 text-capitalize text-center">{{table.name}}</h5>
         </div>
         <!-- cart -->
         <div class="px-3 border-bottom h overflow-auto" style="--h: calc(100vh - 450px);">
