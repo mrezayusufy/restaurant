@@ -30,6 +30,51 @@
 .column {
   grid-auto-flow: column;
 }
+.n1 {
+  grid-area: n1;
+}
+.n2 {
+  grid-area: n2;
+}
+.n3 {
+  grid-area: n3;
+}
+.n4 {
+  grid-area: n4;
+}
+.n5 {
+  grid-area: n5;
+}
+.n6 {
+  grid-area: n6;
+}
+.n7 {
+  grid-area: n7;
+}
+.n8 {
+  grid-area: n8;
+}
+.n9 {
+  grid-area: n9;
+}
+.n0 {
+  grid-area: n0;
+}
+.c {
+  grid-area: c;
+}
+.p {
+  grid-area: p;
+}
+.calc {
+  grid-template-areas:
+    "n0 n1 n2 n3"
+    "c n4 n5 n6"
+    "p n7 n8 n9";
+}
+.g-row {
+  grid-auto-flow: row;
+}
 .grow-3 {
   flex-grow: 3;
 }

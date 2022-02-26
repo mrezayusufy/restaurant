@@ -210,7 +210,7 @@ if(isset($_POST["action"]))
 		echo json_encode($output);
 
 	}
-	// get tables
+	// get table
 	if($_POST["action"] == 'fetch_single')
 	{
 		$object->query = "

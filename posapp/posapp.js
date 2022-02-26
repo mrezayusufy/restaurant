@@ -1,5 +1,48 @@
+'use strict'
 var app = angular.module("app", []);
+const hostname = window.location.hostname;
+
+const protocol = window.location.protocol + "//";
+const url = protocol + hostname;
 app.controller("controller", function ($scope, $http) {
+  $scope.operator = ["+", "-", "*", "/"];
+  $scope.firstVal = "";
+  $scope.secondVal = "";
+  $scope.currentOperator = "";
+  $scope.result = "";
+  var flag = false;
+  $scope.numberDisplay = function (num) {
+    assignValue(num);
+  };
+  function assignValue(num) {
+    if (flag) {
+      $scope.secondVal += num;
+    } else {
+      $scope.firstVal += num;
+    }
+  }
+  function activeFlag() {
+    falg = true;
+  }
+  $scope.createSecondValue = function (operator) {
+    activeFlag();
+    $scope.currentOperator = operator;
+  };
+  $scope.doMath = function () {
+    if ($scope.firstVal != "" && $scope.secondVal != "") {
+      var mathFormat =
+        $scope.firstVal + $scope.currentOperator + $scope.secondVal;
+      $scope.result = eval(mathFormat);
+    }
+  };
+
+  $scope.clear = function () {
+    valueFlag = false;
+    $scope.firstVal = "";
+    $scope.secondVal = "";
+    $scope.currentOperator = "";
+    $scope.result = "";
+  };
   $scope.cart = [];
   $scope.date = new Date();
   $scope.total_category_page = 1;
@@ -7,7 +50,10 @@ app.controller("controller", function ($scope, $http) {
   $scope.products = [];
   $scope.categories = [];
   $scope.tables = [];
-  $scope.url = "<?= $url; ?>";
+  $scope.table = '';
+  $scope.tax = 2.0;
+  $scope.url = url;
+  
   $scope.fetchProducts = function (category) {
     var c = category ? "&category=" + category : "";
     $http
@@ -19,6 +65,7 @@ app.controller("controller", function ($scope, $http) {
   // fetch category by pagination
   // set category to fetch product by category
   $scope.category = null;
+
   $scope.categoryPage = null;
   $scope.setCategory = function (category) {
     if (category) {
@@ -32,9 +79,7 @@ app.controller("controller", function ($scope, $http) {
   $scope.page = 1;
   $scope.fetchCategories = function (page) {
     $http
-      .get(
-        `${$scope.url}/category_action.php?action=categories&page=${page}&skip=${$scope.skip}`
-      )
+      .get(`${$scope.url}/category_action.php?action=categories`)
       .then(function (data) {
         $scope.categories = data.data.data;
         $scope.total_category_page = data.data.total_page;
@@ -69,7 +114,9 @@ app.controller("controller", function ($scope, $http) {
       $scope.cart = data.data;
     });
   };
-
+  $scope.setTable = function (table) {
+    $scope.table = table;
+  };
   $scope.setTotal = function () {
     var total = 0;
     for (var count = 0; count < $scope.cart.length; count++) {
