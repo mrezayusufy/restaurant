@@ -12,7 +12,8 @@ if(isset($_GET["action"])) {
 		$output = array();
 
 		$main_query = "SELECT * FROM table_data ";
-
+		$object->query = $main_query;
+		$object->execute();
 		$search_query = '';
 
 		if(isset($_POST["search"]["value"]) && isset($_POST["search"]))
@@ -30,32 +31,32 @@ if(isset($_GET["action"])) {
 		{
 			$order_query = ' ORDER BY table_id DESC ';
 		}
-
+		$total_rows = '';
+		$total_pages = '';
 		$limit_query = '';
-
-		if(isset($_POST["length"]))
-		{
-			$limit_query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		// pagination
+		if (isset($_GET["page"]) && isset($_GET["skip"])) {
+			$page = 1;
+			if (isset($_GET['page'])) {
+				$page = filter_var($_GET['page'], FILTER_SANITIZE_NUMBER_INT);
+			}
+			$skip = (int)$_GET["skip"] ?? 10;
+			$per_page = $skip;
+			$total_rows = $object->row_count();
+			$total_pages = ceil($total_rows / $per_page);
+			$offset = ($page - 1) * $per_page;
+			$total_pages = ceil($total_rows / $per_page);
+			$limit_query = " LIMIT  $offset , $per_page ";
 		}
-
-		$object->query = $main_query . $search_query . $order_query;
-
+		// main query
+		$object->query = $main_query . $order_query . $limit_query;
 		$object->execute();
-
 		$filtered_rows = $object->row_count();
-
-		$object->query .= $limit_query;
-
 		$result = $object->get_result();
-
 		$object->query = $main_query;
-
 		$object->execute();
-
 		$total_rows = $object->row_count();
-
 		$data = array();
-
 		foreach($result as $row)
 		{
 			$sub_array = array();

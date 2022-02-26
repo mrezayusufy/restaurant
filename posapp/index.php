@@ -74,7 +74,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
       <!-- tables -->
       <div class="just d-flex flex-column p-3 gap">
         <div class="row gap align-items-baseline justify-content-center">
-          <button ng-repeat="t in tables" ng-class="{'bg-light text-dark' : t.status === 'Enable'}" ng-click="setTable(t)" class="btn btn-secondary p-1 fs-s text-capitalize">
+          <button ng-repeat="t in tables" ng-class="{'bg-black text-light border-secondary' : t === table}" ng-click="setTable(t)" class="btn btn-light p-1 fs-s text-capitalize font-weight-bold">
             <div>{{t.name}}</div>
             <div>{{t.capacity}}</div>
           </button>
@@ -83,11 +83,11 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
         <section class="justify-content-center d-flex">
           <nav aria-label="Page navigation mt-3">
             <ul class="m-0 overflow-hidden pagination rounded-pill">
-              <li class="page-item"><a class="page-link border-0 fs-s" href="#"><i class="fas fa-chevron-left"></i></a></li>
-              <li class="page-item"><a class="page-link border-0 fs-s" href="#">1</a></li>
-              <li class="page-item"><a class="page-link border-0 fs-s" href="#">2</a></li>
-              <li class="page-item"><a class="page-link border-0 fs-s" href="#">3</a></li>
-              <li class="page-item"><a class="page-link border-0 fs-s" href="#"><i class="fas fa-chevron-right"></i></a></li>
+              <li class="page-item"><a class="page-link border-0 fs-s p" href="#"><i class="fas fa-chevron-left"></i></a></li>
+              <li class="page-item"><a class="page-link border-0 fs-s p" href="#">1</a></li>
+              <li class="page-item"><a class="page-link border-0 fs-s p" href="#">2</a></li>
+              <li class="page-item"><a class="page-link border-0 fs-s p" href="#">3</a></li>
+              <li class="page-item"><a class="page-link border-0 fs-s p" href="#"><i class="fas fa-chevron-right"></i></a></li>
             </ul>
           </nav>
         </section>
@@ -143,20 +143,27 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
         </div>
         <!-- subtotal -->
         <div class="px-3 border-bottom">
-          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
+          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 2fr;">
             <h6 class="font-weight-bold m-0">Subtotal:</h6>
             <div class="text-left pl-1">€ {{setTotal()}}</div>
           </div>
-          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
+          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 2fr;">
             <h6 class="m-0">Tax:</h6>
             <div class="text-left pl-1">€ {{tax}}</div>
           </div>
         </div>
         <!-- total -->
         <div class="px-3 border-bottom">
-          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 1fr;">
+          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 2fr;">
             <h6 class="m-0">Total:</h6>
             <div class="text-left pl-1">€ {{tax + setTotal()}}</div>
+          </div>
+        </div>
+        <!-- paid -->
+        <div class="px-3 border-bottom">
+          <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 2fr;">
+            <h6 class="m-0">Paid:</h6>
+            <div class="text-left pl-1">€ {{ paid }}</div>
           </div>
         </div>
         <!-- checkout -->
@@ -172,19 +179,19 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
       </div>
       <div class="grid column g-columns g-rows gap mx-4 align-items-center justify-content-center calc" style="--c: 40px 40px 40px 40px;">
         <button class="btn btn-outline-light btn-circle n0">0</button>
-        <button class="btn btn-outline-light btn-circle c">c</button>
-        <button class="btn btn-outline-light btn-circle p" ng-click="numberDisplay('.')">.</button>
-        <button class="btn btn-outline-light btn-circle n1" ng-click="numberDisplay(1)">1</button>
-        <button class="btn btn-outline-light btn-circle n2" ng-click="numberDisplay(2)">2</button>
-        <button class="btn btn-outline-light btn-circle n3" ng-click="numberDisplay(3)">3</button>
-        <button class="btn btn-outline-light btn-circle n4" ng-click="numberDisplay(4)">4</button>
-        <button class="btn btn-outline-light btn-circle n5" ng-click="numberDisplay(5)">5</button>
-        <button class="btn btn-outline-light btn-circle n6" ng-click="numberDisplay(6)">6</button>
-        <button class="btn btn-outline-light btn-circle n7" ng-click="numberDisplay(7)">7</button>
-        <button class="btn btn-outline-light btn-circle n8" ng-click="numberDisplay(8)">8</button>
-        <button class="btn btn-outline-light btn-circle n9" ng-click="numberDisplay(9)">9</button>
-        <button class="btn btn-outline-light btn-circle n9" ng-click="numberDisplay(9)">9</button>
-        <button class="btn btn-outline-light btn-circle n9" ng-click="numberDisplay(9)">9</button>
+        <button class="btn btn-outline-light btn-circle c" ng-click="clear()">c</button>
+        <button class="btn btn-outline-light btn-circle point" ng-click="numberDisplay('.')">.</button>
+        <button class="btn btn-outline-light btn-circle n1" ng-click="numberDisplay('1')">1</button>
+        <button class="btn btn-outline-light btn-circle n2" ng-click="numberDisplay('2')">2</button>
+        <button class="btn btn-outline-light btn-circle n3" ng-click="numberDisplay('3')">3</button>
+        <button class="btn btn-outline-light btn-circle n4" ng-click="numberDisplay('4')">4</button>
+        <button class="btn btn-outline-light btn-circle n5" ng-click="numberDisplay('5')">5</button>
+        <button class="btn btn-outline-light btn-circle n6" ng-click="numberDisplay('6')">6</button>
+        <button class="btn btn-outline-light btn-circle n7" ng-click="numberDisplay('7')">7</button>
+        <button class="btn btn-outline-light btn-circle n8" ng-click="numberDisplay('8')">8</button>
+        <button class="btn btn-outline-light btn-circle n9" ng-click="numberDisplay('9')">9</button>
+        <button class="btn btn-outline-light btn-circle n9" ng-click="numberDisplay('9')">9</button>
+        <button class="btn btn-outline-light btn-circle n9" ng-click="numberDisplay('9')">9</button>
       </div>
     </section> <!-- end cart -->
 

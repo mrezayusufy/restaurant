@@ -1,7 +1,6 @@
 'use strict'
 var app = angular.module("app", []);
 const hostname = window.location.hostname;
-
 const protocol = window.location.protocol + "//";
 const url = protocol + hostname;
 app.controller("controller", function ($scope, $http) {
@@ -10,38 +9,17 @@ app.controller("controller", function ($scope, $http) {
   $scope.secondVal = "";
   $scope.currentOperator = "";
   $scope.result = "";
-  var flag = false;
+  $scope.paid = "";
   $scope.numberDisplay = function (num) {
-    assignValue(num);
-  };
-  function assignValue(num) {
-    if (flag) {
-      $scope.secondVal += num;
-    } else {
-      $scope.firstVal += num;
-    }
+    $scope.paid += num;
   }
+  
   function activeFlag() {
     falg = true;
   }
-  $scope.createSecondValue = function (operator) {
-    activeFlag();
-    $scope.currentOperator = operator;
-  };
-  $scope.doMath = function () {
-    if ($scope.firstVal != "" && $scope.secondVal != "") {
-      var mathFormat =
-        $scope.firstVal + $scope.currentOperator + $scope.secondVal;
-      $scope.result = eval(mathFormat);
-    }
-  };
 
   $scope.clear = function () {
-    valueFlag = false;
-    $scope.firstVal = "";
-    $scope.secondVal = "";
-    $scope.currentOperator = "";
-    $scope.result = "";
+    $scope.paid = "";
   };
   $scope.cart = [];
   $scope.date = new Date();
@@ -50,7 +28,7 @@ app.controller("controller", function ($scope, $http) {
   $scope.products = [];
   $scope.categories = [];
   $scope.tables = [];
-  $scope.table = '';
+  $scope.table = null;
   $scope.tax = 2.0;
   $scope.url = url;
   
@@ -104,7 +82,7 @@ app.controller("controller", function ($scope, $http) {
   // fetch tables
   $scope.fetchTables = function () {
     $http
-      .get($scope.url + "/table_action.php?action=tables")
+      .get($scope.url + "/table_action.php?action=tables&page=1&skip=10")
       .then(function (data) {
         $scope.tables = data.data.data;
       });

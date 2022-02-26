@@ -63,14 +63,18 @@
 .c {
   grid-area: c;
 }
-.p {
-  grid-area: p;
+.point {
+  grid-area: point;
 }
 .calc {
   grid-template-areas:
     "n0 n1 n2 n3"
     "c n4 n5 n6"
-    "p n7 n8 n9";
+    "point n7 n8 n9";
+}
+.p {
+  --p: 4px 10px;
+  padding: var(--p);
 }
 .g-row {
   grid-auto-flow: row;
@@ -87,8 +91,9 @@
   grid-template-rows: var(--r);
 }
 .bg-black {
-  background-color: black;
+  background-color: black !important;
 }
+
 .text-black {
   color: black;
 }
