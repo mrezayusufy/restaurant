@@ -8,7 +8,7 @@ class rms{
 	public $query;
 	public $statement;
 	public $cur;
-
+ 
 	function __construct(){
 		$this->connect = new PDO("mysql:host=localhost;dbname=pospointdb", "root", "");
 		if($this->Set_timezone() != '') {
