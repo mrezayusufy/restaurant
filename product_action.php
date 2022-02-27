@@ -7,7 +7,7 @@ include('rms.php');
 $object = new rms();
 // products in json
 
-if(isset($_GET["action"]) && $_GET["action"] == "products"){
+if(isset($_GET["action"]) && $_GET["action"] == "products" && isset($_GET["category"])){
 	$order_column = array('category_name', 'product_name', 'product_price', 'product_status');
 
 	$output = array();
@@ -76,6 +76,14 @@ if(isset($_GET["action"]) && $_GET["action"] == "products"){
 		"data"							=> 	$data
 	);
 		
+	echo json_encode($output);
+} else {
+	$output = array(
+		"recordsTotal"  		=>  0,
+		"recordsFiltered" 	=> 	0,
+		"data"							=> 	[]
+	);
+
 	echo json_encode($output);
 }
 if(isset($_POST["action"])){

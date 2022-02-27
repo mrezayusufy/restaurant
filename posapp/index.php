@@ -31,7 +31,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
 </head>
 
 <body>
-  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables(); setCategory(); setPage(); fetchCart(); page = 1" class="d-flex bg-black text-light">
+  <main ng-app="app" ng-controller="controller" ng-init="fetchProducts(); fetchCategories(); fetchTables(); setCategory(); setPage(); fetchCart(); page = 1; fetchTaxProduct();" class="d-flex bg-black text-light">
     <!-- left side -->
     <section class="grid column g-columns g-rows col-2 align-items-center h-100vh w-75 screen" style="--c: 1fr; --r: 100px calc(100vh - 150px) 50px;">
       <div class="mt-3 text-center">
@@ -69,7 +69,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
         <button class="btn text-light rounded-pill h5 m-0" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-power-off"></i> Logout</butt>
       </div>
     </section>
-    <!-- middle section -->
+    <!-- center-section -->
     <section class="col-7 p-0 bg-black grid column screen g-columns g-rows" style="--c: 1fr;--r: 110px calc(100vh - 150px) 50px;">
       <!-- tables -->
       <div class="just d-flex flex-column p-3 gap">
@@ -145,18 +145,18 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
         <div class="px-3 border-bottom">
           <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 2fr;">
             <h6 class="font-weight-bold m-0">Subtotal:</h6>
-            <div class="text-left pl-1">€ {{setTotal()}}</div>
+            <div class="text-left pl-1">€ {{setSubtotal()}}</div>
           </div>
           <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 2fr;">
             <h6 class="m-0">Tax:</h6>
-            <div class="text-left pl-1">€ {{tax}}</div>
+            <div class="text-left pl-1">{{tax}}%</div>
           </div>
         </div>
         <!-- total -->
         <div class="px-3 border-bottom">
           <div class="grid g-columns column justify-content-between text-black" style="--c: 4fr 2fr;">
             <h6 class="m-0">Total:</h6>
-            <div class="text-left pl-1">€ {{tax + setTotal()}}</div>
+            <div class="text-left pl-1">€ {{setTotal()}}</div>
           </div>
         </div>
         <!-- paid -->
@@ -219,7 +219,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
           <h2 class="text-center font-weight-bold m-0">Restaurant</h2>
           <h6 class="text-center">main street 1</h6>
           <h6 class="text-center">90210 Weldone</h6>
-          <h6 class="text-center">Tax No:: 124563443</h6>
+          <h6 class="text-center">Fax No:: 124563443</h6>
           <h6 class="text-center">+1 234 567 890</h6>
           <h6 class="text-center">office@restaurant.com</h6>
         </div>
@@ -243,7 +243,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
             <div class="my-2">
               <div class="d-flex flex-row justify-content-between mx-2">
                 <h6>Subtotal:</h6>
-                <h6>{{setTotal()}}</h6>
+                <h6>{{setSubtotal()}}</h6>
               </div>
               <div class="d-flex flex-row justify-content-between mx-2">
                 <h6>Tax:</h6>
@@ -252,11 +252,11 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
             </div>
             <div class="d-flex flex-row justify-content-between mx-2 h5 font-weight-bold">
               <p>Total:</p>
-              <p>€{{setTotal() + tax}}</p>
+              <p>€{{setTotal()}}</p>
             </div>
             <div class="d-flex flex-row justify-content-between mx-2">
               <h6>Paid:</h6>
-              <h6>€{{setTotal() + tax}}</h6>
+              <h6>€{{paid}}</h6>
             </div>
           </div>
         </div>

@@ -29,9 +29,17 @@ app.controller("controller", function ($scope, $http) {
   $scope.categories = [];
   $scope.tables = [];
   $scope.table = null;
-  $scope.tax = 2.0;
+  $scope.tax = "2.0";
   $scope.url = url;
-  
+  // fetch tax product
+  $scope.fetchTaxProduct = function () {
+    $http
+      .get(`${$scope.url}/tax_action.php?action=tax_name&name=Product`)
+      .then(function (data) {
+        var tax = parseFloat(data.data.percentage);
+        $scope.tax = tax;
+      });
+  };
   $scope.fetchProducts = function (category) {
     var c = category ? "&category=" + category : "";
     $http
@@ -96,6 +104,10 @@ app.controller("controller", function ($scope, $http) {
     $scope.table = table;
   };
   $scope.setTotal = function () {
+    // Subtotal+(subtotal*tax%)/100
+    return $scope.setSubtotal() + ($scope.setSubtotal() * $scope.tax) / 100;
+  }
+  $scope.setSubtotal = function () {
     var total = 0;
     for (var count = 0; count < $scope.cart.length; count++) {
       var item = $scope.cart[count];

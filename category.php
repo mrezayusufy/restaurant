@@ -13,6 +13,7 @@ if (!$object->is_master_user()) {
 }
 
 include('header.php');
+
 ?>
 
 <!-- Page Heading -->

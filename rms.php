@@ -1,7 +1,14 @@
 <?php
-
+// include_once './Dotenv.php';
 //rms.php
+// use Reyu\DotEnv;
 
+// (new Dotenv(__DIR__ . '/.env'))->load();
+
+// $username = getenv('DB_USERNAME');
+// $database = getenv('DB_NAME');
+// $password = getenv('DB_PASSWORD');
+// mysql:host=localhost;dbname=test;
 class rms{
 	public $base_url = '';
 	public $connect;
