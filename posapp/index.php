@@ -178,7 +178,7 @@ $url = "http://" . $_SERVER["HTTP_HOST"];
         <div class="btn btn-outline-light px-3 btn-circle">€</div>
       </div>
       <div class="grid column g-columns g-rows gap mx-4 align-items-center justify-content-center calc" style="--c: 40px 40px 40px 40px;">
-        <button class="btn btn-outline-light btn-circle n0">0</button>
+        <button class="btn btn-outline-light btn-circle n0" ng-click="numberDisplay('0')">0</button>
         <button class="btn btn-outline-light btn-circle c" ng-click="clear()">c</button>
         <button class="btn btn-outline-light btn-circle point" ng-click="numberDisplay('.')">.</button>
         <button class="btn btn-outline-light btn-circle n1" ng-click="numberDisplay('1')">1</button>
